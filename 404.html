@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | Pruthvi Panchal</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#04060D">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <!-- Self-contained on purpose: GitHub Pages serves this file at any missing path, so relative asset URLs would break. -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #04060d; --line: rgba(140, 170, 255, .2);
+      --text: #eef2ff; --text-2: #aab5d1; --text-3: #7682a1;
+      --blue: #5aa9ff; --amber: #ffb547; --amber-2: #ffc96e; --amber-ink: #1d1404;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 16px;
+      background:
+        radial-gradient(1px 1px at 12% 18%, rgba(236, 241, 255, .7), transparent),
+        radial-gradient(1px 1px at 78% 12%, rgba(236, 241, 255, .6), transparent),
+        radial-gradient(1.5px 1.5px at 64% 72%, rgba(170, 205, 255, .7), transparent),
+        radial-gradient(1px 1px at 30% 82%, rgba(236, 241, 255, .5), transparent),
+        radial-gradient(1px 1px at 88% 56%, rgba(255, 214, 170, .6), transparent),
+        radial-gradient(1px 1px at 8% 60%, rgba(236, 241, 255, .5), transparent),
+        radial-gradient(closest-side at 50% 42%, rgba(52, 120, 255, .14), transparent 70%);
+      color: var(--text);
+      font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { width: min(100%, 560px); }
+    .big {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .08em;
+      margin: 0;
+      font-size: clamp(5rem, 3rem + 12vw, 9rem);
+      font-weight: 720;
+      font-stretch: 112%;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    /* The zero is a small Earth */
+    .planet {
+      position: relative;
+      width: .78em;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(156, 207, 255, .55) 0 1.5px, transparent 2.5px) 0 0 / 9px 9px,
+        radial-gradient(circle at 35% 30%, #1d4f9e, #081a38 62%, #050b19);
+      box-shadow: 0 0 40px 6px rgba(90, 169, 255, .3), inset -10px -12px 30px rgba(0, 0, 0, .55);
+    }
+    .planet::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 170%; height: 42%;
+      border: 1.5px dashed rgba(160, 190, 255, .3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotate(-18deg);
+    }
+    .planet i {
+      position: absolute;
+      right: -28%; top: 18%;
+      width: 16%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #f2f4f8, #8d93a2);
+    }
+    h1 { margin: 26px 0 0; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.4rem); font-weight: 680; font-stretch: 108%; letter-spacing: -.025em; }
+    p { margin: 14px 0 0; color: var(--text-2); font-size: 1.08rem; line-height: 1.6; }
+    code {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text-3);
+      font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+      font-size: .85rem;
+      word-break: break-all;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 50px;
+      margin-top: 28px;
+      padding: 0 22px;
+      border-radius: 14px;
+      background: var(--amber);
+      box-shadow: 0 10px 30px -12px rgba(255, 181, 71, .6);
+      color: var(--amber-ink);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color .2s, transform .2s;
+    }
+    .btn:hover { background: var(--amber-2); transform: translateY(-1px); }
+    .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="big" aria-label="404"><span>4</span><span class="planet" aria-hidden="true"><i></i></span><span>4</span></p>
+    <h1>This page drifted out of orbit.</h1>
+    <p>It doesn't exist, or it has moved. Everything else is still right here on Earth.</p>
+    <code id="req-path">/missing-page</code><br>
+    <a class="btn" href="/">Back to Earth →</a>
+  </main>
+  <script>document.getElementById('req-path').textContent = location.pathname;</script>
+</body>
+</html>

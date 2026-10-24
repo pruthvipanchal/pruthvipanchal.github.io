@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pruthvi Panchal | Software Engineer, Go &amp; C++ Trading Systems</title>
+  <meta name="description" content="Software engineer with 4 years in fintech. I build real-time trading systems in Go and C++: 17 microservices serving 20,000+ people at once, with orders handled in 250 microseconds.">
+  <meta name="author" content="Pruthvi Panchal">
+  <link rel="canonical" href="https://pruthvip.tech/">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#04060D">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="pruthvip.tech">
+  <meta property="og:url" content="https://pruthvip.tech/">
+  <meta property="og:title" content="Pruthvi Panchal | Software Engineer">
+  <meta property="og:description" content="I build lightning-fast trading systems in Go and C++: 17 microservices, 20,000+ people online at once, 250µs per order.">
+  <meta property="og:image" content="https://pruthvip.tech/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pruthvi Panchal, software engineer, beside a glowing dotted Earth with Gandhinagar marked">
+  <meta property="profile:first_name" content="Pruthvi">
+  <meta property="profile:last_name" content="Panchal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pruthvi Panchal | Software Engineer">
+  <meta name="twitter:description" content="I build lightning-fast trading systems in Go and C++: 17 microservices, 20,000+ people online at once, 250µs per order.">
+  <meta name="twitter:image" content="https://pruthvip.tech/assets/og-image.png">
+
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@600&text=%E0%A4%AA%E0%A5%83%E0%A4%A5%E0%A5%8D%E0%A4%B5%E0%A5%80&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script>
+    // Interactive extras only show once scripts run. A saved light theme applies
+    // before first paint, so the page never flashes the wrong colours.
+    (function () {
+      document.documentElement.classList.add('js');
+      try { if (localStorage.getItem('pu-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+    })();
+  </script>
+  <script src="assets/js/earth-data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Pruthvi Panchal",
+    "url": "https://pruthvip.tech/",
+    "image": "https://pruthvip.tech/assets/og-image.png",
+    "jobTitle": "Software Engineer",
+    "worksFor": { "@type": "Organization", "name": "Greeksoft Technologies" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Gandhinagar", "addressRegion": "Gujarat", "addressCountry": "IN" },
+    "email": "mailto:pruthvipanchal46@gmail.com",
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Parul University" },
+      { "@type": "CollegeOrUniversity", "name": "Gujarat Technological University" }
+    ],
+    "knowsAbout": ["Go", "C++", "Distributed systems", "Microservices", "Low-latency systems", "High-frequency trading", "NATS JetStream", "Kubernetes", "Redis", "PostgreSQL", "FIX protocol"],
+    "sameAs": ["https://linkedin.com/in/pruthvipanchal", "https://github.com/pruthvipanchal"]
+  }
+  </script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11.5M7.5 11 12 15.5 16.5 11M5 19.5h14"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.75v2M12 19.25v2M5.46 5.46l1.41 1.41M17.13 17.13l1.41 1.41M2.75 12h2M19.25 12h2M5.46 18.54l1.41-1.41M17.13 6.87l1.41-1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.6A8.25 8.25 0 0 1 9.4 4 8.25 8.25 0 1 0 20 14.6Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7.5 7.5 6 7.5-6"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><path d="M4.5 7.5 9 12l-4.5 4.5M11.5 16.5h8"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4.5v4h-4"/></symbol>
+    <symbol id="i-broadcast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.8"/><path d="M8.2 15.8a5.4 5.4 0 0 1 0-7.6M15.8 8.2a5.4 5.4 0 0 1 0 7.6M5.4 18.6a9.3 9.3 0 0 1 0-13.2M18.6 5.4a9.3 9.3 0 0 1 0 13.2"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.75 5.5 13.25h6l-1 8 7.5-10.5h-6l1-8Z"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M10.9 6.9 6.1 16M13.1 6.9 17.9 16M7.2 18h9.6"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="2"/><rect x="4" y="13.5" width="16" height="6.5" rx="2"/><path d="M8 7.25h.5M8 16.75h.5"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M3.75 16.5a8.25 8.25 0 1 1 16.5 0"/><path d="m12 16.5 4.25-5.25"/><circle cx="12" cy="16.5" r="1.25"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8 12 3.5Z"/><path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16l8.5 4.5 8.5-4.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M11 3.5l1.9 5 5 1.9-5 1.9-1.9 5-1.9-5-5-1.9 5-1.9 1.9-5Z"/><path d="M18.5 15.5l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1Z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.56V9h3.56v11.45Z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <canvas class="stars" data-stars aria-hidden="true"></canvas>
+
+  <header class="bar" data-header>
+    <div class="wrap bar-inner">
+      <a class="mark" href="#top" aria-label="Pruthvi Panchal, back to top">
+        <svg class="mark-svg" viewBox="0 0 32 32" aria-hidden="true">
+          <ellipse class="mark-orbit" cx="16" cy="16" rx="13.5" ry="5.4" transform="rotate(-24 16 16)"/>
+          <circle class="mark-earth" cx="16" cy="16" r="4.6"/>
+          <circle class="mark-moon" cx="28.5" cy="11" r="2.1"/>
+        </svg>
+        <span class="mark-name">Pruthvi Panchal</span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#universe">Universe</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="bar-actions">
+        <button class="icon-btn js-only" type="button" data-theme-toggle aria-label="Switch to light theme">
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn-small btn-ghost bar-resume" href="assets/Pruthvi-Panchal-Resume.pdf" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume
+        </a>
+        <button class="icon-btn menu-toggle js-only" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+          <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero: Pruthvi means Earth, so the site opens on it -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker hero-kicker">Software engineer · Gandhinagar, India</p>
+          <h1 id="hero-title" class="hero-title"><span class="line"><span>Pruthvi</span></span><span class="line"><span>Panchal</span></span></h1>
+          <p class="hero-lead">I build lightning-fast trading systems in Go and C++, used by more than 20,000 people at the same time.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:pruthvipanchal46@gmail.com">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Email me
+            </a>
+            <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" download>
+              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume
+            </a>
+            <a class="btn btn-ghost btn-square" href="https://linkedin.com/in/pruthvipanchal" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+              <svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>
+            </a>
+            <a class="btn btn-ghost btn-square" href="https://github.com/pruthvipanchal" target="_blank" rel="noopener" aria-label="GitHub profile">
+              <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-earth" data-earth-stage>
+          <canvas class="earth-canvas js-only" data-earth role="img" aria-label="A glowing dotted Earth, turned to show India, with Gandhinagar marked. Drag to spin it."></canvas>
+          <button class="earth-pin js-only" type="button" data-pin hidden aria-describedby="pin-tip">
+            <span class="pin-dot" aria-hidden="true"></span>
+            <span class="pin-label">Gandhinagar <b>· I'm here</b></span>
+          </button>
+          <p class="pin-tip" id="pin-tip" role="tooltip" data-pin-tip hidden>Gandhinagar, Gujarat. I live here and work in GIFT City, India's international finance hub.</p>
+          <div class="earth-fallback" aria-hidden="true"></div>
+          <p class="earth-hint"><span class="deva" lang="hi">पृथ्वी</span> <b>Pruthvi</b> means Earth.<span class="js-only"> Drag to spin it.</span></p>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll to About"><span></span></a>
+    </section>
+
+    <!-- At a glance -->
+    <section class="stats" aria-label="At a glance">
+      <div class="wrap stats-grid">
+        <div class="stat" data-reveal>
+          <p class="stat-num"><span data-count="4">4</span></p>
+          <p class="stat-label">Years in fintech</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat-num"><span data-count="17">17</span></p>
+          <p class="stat-label">Microservices in production</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat-num"><span data-count="20000">20,000</span><i>+</i></p>
+          <p class="stat-label">People online at once</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat-num"><span data-count="250">250</span><i>µs</i></p>
+          <p class="stat-label">Average order time: a quarter of a millisecond. <button class="link-btn js-only" type="button" data-race-open>Can you beat it?</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap about-grid">
+        <div data-reveal>
+          <p class="kicker">About me</p>
+          <h2 id="about-title">I make trading software fast and reliable.</h2>
+          <p class="lead">I'm a software engineer at Greeksoft Technologies in GIFT City. I build the systems behind a trading platform (live prices, orders, payments and alerts) for 20,000+ users at once. Before that, I spent two years on high-frequency trading in C++.</p>
+        </div>
+        <ul class="focus">
+          <li data-reveal>
+            <span class="focus-icon"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>
+            <div><h3>Go microservices</h3><p>17 services that talk over NATS and run on Kubernetes.</p></div>
+          </li>
+          <li data-reveal>
+            <span class="focus-icon"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+            <div><h3>Speed</h3><p>From C++ trading engines down to Linux kernel tuning.</p></div>
+          </li>
+          <li data-reveal>
+            <span class="focus-icon"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span>
+            <div><h3>AI tools</h3><p>I build with LLMs and AI agents every day.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="kicker">Experience</p>
+          <h2 id="experience-title">Where I've worked</h2>
+        </div>
+
+        <ol class="timeline">
+          <li class="tl-item is-now" data-reveal>
+            <p class="tl-when"><time datetime="2022-07">Jul 2022</time> – Present <span class="tl-badge">Now</span></p>
+            <div class="tl-card">
+              <div class="company">
+                <h3>Greeksoft Technologies</h3>
+                <p class="tl-org"><span>GIFT City, Gandhinagar</span> · <span>4+ years</span> · <span>2 roles</span></p>
+              </div>
+              <ol class="roles">
+                <li class="role is-now">
+                  <p class="role-when"><time datetime="2024-06">Jun 2024</time> – Present</p>
+                  <h4>Software Developer · Go &amp; Distributed Systems</h4>
+                  <ul>
+                    <li>Built <b>17 Go microservices</b> for a trading platform with <b>20,000+ users</b> online at once</li>
+                    <li>Live prices to <b>10,000+ connections</b> per server; orders in <b>250 µs</b> on average</li>
+                    <li>Kubernetes, CI/CD and monitoring: <b>99.9% uptime</b> and <b>60% faster</b> deploys</li>
+                  </ul>
+                </li>
+                <li class="role">
+                  <p class="role-when"><time datetime="2022-07">Jul 2022</time> – <time datetime="2024-07">Jul 2024</time></p>
+                  <h4>Software Developer · C++ Trading Systems</h4>
+                  <ul>
+                    <li>High-frequency trading systems in C++, with <b>FIX</b> order routing</li>
+                    <li>Cut order-routing latency by <b>15%</b> by moving hot paths into memory</li>
+                    <li>Fixed <b>200+ critical bugs</b> in algorithmic trading strategies</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="tl-item" data-reveal>
+            <p class="tl-when"><time datetime="2021-03">Mar 2021</time> – <time datetime="2021-06">Jun 2021</time></p>
+            <div class="tl-card">
+              <div class="company">
+                <h3>Angel IT Solution</h3>
+                <p class="tl-org"><span>Vadodara</span> · <span>4 months</span></p>
+              </div>
+              <ol class="roles">
+                <li class="role">
+                  <h4>Full Stack Web Developer</h4>
+                  <ul>
+                    <li>Built responsive websites for clients, from design to launch</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </li>
+        </ol>
+
+        <div class="edu" data-reveal>
+          <p class="edu-title">Education</p>
+          <ul>
+            <li><b>B.Tech, Computer Science</b><span>Parul University · 2022 · CGPA 7.92</span></li>
+            <li><b>Diploma, Computer Engineering</b><span>Gujarat Technological University · 2019 · CGPA 6.91</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="kicker">Work</p>
+          <h2 id="work-title">Things I've built</h2>
+          <p class="lead">All inside a real trading platform. Every number is from production.</p>
+        </div>
+
+        <ul class="cards">
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-broadcast"/></svg></span>
+            <p class="card-num">10,000+</p>
+            <p class="card-unit">live connections per server</p>
+            <h3>Real-time price broadcast</h3>
+            <p>Streams live market prices to thousands of traders at once, in under a millisecond.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+            <p class="card-num">250 µs</p>
+            <p class="card-unit">average per order</p>
+            <h3>Lock-free order replication</h3>
+            <p>Copies orders between systems at 1,250+ a second, with 95%+ cache hits.</p>
+            <button class="link-btn js-only" type="button" data-race-open>Can you beat 250 µs?<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg></span>
+            <p class="card-num">3</p>
+            <p class="card-unit">payment gateways, one system</p>
+            <h3>Payments layer</h3>
+            <p>ATOM, Razorpay and HDFC UPI behind one interface, with automatic reconciliation.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></span>
+            <p class="card-num">10+</p>
+            <p class="card-unit">services on one message bus</p>
+            <h3>Event backbone</h3>
+            <p>NATS JetStream links the services, so no message is lost even when one goes down.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg></span>
+            <p class="card-num">99.9%</p>
+            <p class="card-unit">uptime on Kubernetes</p>
+            <h3>Platform &amp; monitoring</h3>
+            <p>CI/CD made deploys 60% faster; Prometheus, OpenTelemetry and Grafana watch everything.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span>
+            <p class="card-num">40%</p>
+            <p class="card-unit">faster responses</p>
+            <h3>Speed tuning</h3>
+            <p>Redis and RediSearch tuning, plus Linux tricks like io_uring and CPU pinning.</p>
+          </li>
+        </ul>
+
+        <div class="how">
+          <div class="how-copy" data-reveal>
+            <h3>See how it works</h3>
+            <p>Prices come in from the exchange and stream out to users. Orders and payments become events. Everything travels on one message bus.</p>
+            <p class="how-try js-only"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg><span><b>Try it:</b> click any box to switch it off. Its messages wait safely, then catch up when you turn it back on.</span></p>
+          </div>
+
+          <figure class="topo" data-reveal aria-label="Diagram of the trading platform: market data and order events moving between Go microservices over a NATS JetStream bus">
+            <svg class="topo-svg" viewBox="0 0 420 316" aria-hidden="true">
+              <g class="t-links">
+                <path d="M70 36V64M210 36V64M350 36V64M70 114V160M210 114V160M350 114V160M70 206V252M210 206V252M350 206V252"/>
+                <path class="t-fan" d="M210 64L170 36M210 64L190 36M210 64L230 36M210 64L250 36"/>
+              </g>
+              <g class="t-ext">
+                <rect x="12" y="8" width="116" height="28" rx="8"/>
+                <text x="70" y="25.7">exchange feed</text>
+                <rect x="152" y="8" width="256" height="28" rx="8"/>
+                <text x="280" y="25.7">users · 20,000+ online</text>
+              </g>
+              <rect class="t-bus" x="4" y="160" width="412" height="46" rx="10"/>
+              <text class="t-bus-label" x="140" y="179.3">MESSAGE BUS</text>
+              <text class="t-bus-label" x="280" y="179.3">NATS JETSTREAM</text>
+              <path class="t-lane" d="M16 193H404"/>
+
+              <g class="t-node" data-node="md"><rect x="12" y="64" width="116" height="50" rx="9"/><text class="t-name" x="70" y="87">market-data</text><text class="t-sub" x="70" y="103">prices in</text><circle class="t-ok" cx="119" cy="72" r="2.5"/></g>
+              <g class="t-node" data-node="bc"><rect x="152" y="64" width="116" height="50" rx="9"/><text class="t-name" x="210" y="87">broadcast</text><text class="t-sub" x="210" y="103">prices out</text><circle class="t-ok" cx="259" cy="72" r="2.5"/></g>
+              <g class="t-node" data-node="or"><rect x="292" y="64" width="116" height="50" rx="9"/><text class="t-name" x="350" y="87">orders</text><text class="t-sub" x="350" y="103">250µs avg</text><circle class="t-ok" cx="399" cy="72" r="2.5"/></g>
+              <g class="t-node" data-node="pay"><rect x="12" y="252" width="116" height="50" rx="9"/><text class="t-name" x="70" y="275">payments</text><text class="t-sub" x="70" y="291">3 gateways</text><circle class="t-ok" cx="119" cy="260" r="2.5"/></g>
+              <g class="t-node" data-node="nt"><rect x="152" y="252" width="116" height="50" rx="9"/><text class="t-name" x="210" y="275">notify</text><text class="t-sub" x="210" y="291">user alerts</text><circle class="t-ok" cx="259" cy="260" r="2.5"/></g>
+              <g class="t-node" data-node="sr"><rect x="292" y="252" width="116" height="50" rx="9"/><text class="t-name" x="350" y="275">search</text><text class="t-sub" x="350" y="291">find anything</text><circle class="t-ok" cx="399" cy="260" r="2.5"/></g>
+
+              <g class="t-packets"></g>
+            </svg>
+            <figcaption class="topo-foot">
+              <span class="legend"><i class="lg lg-md"></i>prices</span>
+              <span class="legend"><i class="lg lg-ev"></i>orders &amp; events</span>
+              <span class="topo-note" data-topo-status>all systems running</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="kicker">Skills</p>
+          <h2 id="skills-title">My toolbox</h2>
+        </div>
+
+        <div class="skills">
+          <div class="skill-group" data-reveal>
+            <h3>Languages</h3>
+            <ul class="chips"><li class="is-key">Go</li><li class="is-key">C++</li><li>JavaScript</li><li>PHP</li><li>SQL</li></ul>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Backend &amp; messaging</h3>
+            <ul class="chips"><li class="is-key">NATS JetStream</li><li>gRPC</li><li>REST</li><li>WebSocket</li><li>FIX</li><li>TCP/UDP</li><li>Gin</li><li>Fasthttp</li><li>MFC &amp; Win32</li></ul>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Data</h3>
+            <ul class="chips"><li>PostgreSQL</li><li>Redis</li><li>RediSearch</li><li>MySQL</li></ul>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Cloud &amp; DevOps</h3>
+            <ul class="chips"><li class="is-key">Kubernetes</li><li>Docker</li><li>CI/CD</li><li>GitLab</li><li>HashiCorp Vault</li><li>Consul</li><li>KrakenD</li></ul>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>Speed &amp; monitoring</h3>
+            <ul class="chips"><li>io_uring</li><li>CPU pinning</li><li>TCP tuning</li><li>perf</li><li>pprof</li><li>Prometheus</li><li>OpenTelemetry</li><li>Grafana</li></ul>
+          </div>
+          <div class="skill-group" data-reveal>
+            <h3>AI</h3>
+            <ul class="chips"><li>Claude API</li><li>OpenAI API</li><li>Claude Code</li><li>Cursor</li><li>AI agents</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pruthvi's Universe: side projects orbit the Earth -->
+    <section class="section universe" id="universe" aria-labelledby="universe-title">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="kicker">Side projects</p>
+          <h2 id="universe-title">Pruthvi's Universe</h2>
+          <p class="lead">My name means Earth, so my side projects orbit around it. Each one is named after something in space.<span class="js-only"> Tap one to explore.</span></p>
+        </div>
+
+        <div class="uni">
+          <div class="uni-main">
+            <div class="orbit-stage js-only" data-orbit-stage>
+              <canvas class="orbit-canvas" data-orbit aria-hidden="true"></canvas>
+              <div class="orbit-labels" data-orbit-labels></div>
+            </div>
+
+            <div class="tabs js-only" role="tablist" aria-label="Side projects" data-tabs>
+              <button type="button" role="tab" id="tab-moonsplit" aria-controls="moonsplit" aria-selected="true" data-tab="moonsplit"><i class="tab-dot dot-moon"></i>Moonsplit</button>
+              <button type="button" role="tab" id="tab-sirius" aria-controls="sirius" aria-selected="false" tabindex="-1" data-tab="sirius"><i class="tab-dot dot-star"></i>Sirius</button>
+              <button type="button" role="tab" id="tab-codenebula" aria-controls="codenebula" aria-selected="false" tabindex="-1" data-tab="codenebula"><i class="tab-dot dot-nebula"></i>CodeNebula</button>
+              <button type="button" role="tab" id="tab-gravitone" aria-controls="gravitone" aria-selected="false" tabindex="-1" data-tab="gravitone"><i class="tab-dot dot-hole"></i>Gravitone</button>
+              <button type="button" role="tab" id="tab-quasar" aria-controls="quasar" aria-selected="false" tabindex="-1" data-tab="quasar"><i class="tab-dot dot-quasar"></i>Quasar</button>
+            </div>
+          </div>
+
+          <div class="panels">
+              <article class="project" id="moonsplit" role="tabpanel" aria-labelledby="tab-moonsplit" data-body="moon">
+                <div class="project-top"><h3>Moonsplit</h3><span class="status">Private beta</span></div>
+                <p class="named"><span>Named after the Moon.</span> It goes through phases every month. So do your flatmates' excuses. Rent doesn't.</p>
+                <p>Splits flat rent and bills to the paisa. One flatmate collects, everyone sees exactly what they owe, and every month has to add up to ₹0.</p>
+                <p class="fun"><span>Excuses accepted</span><b>0</b></p>
+                <ul class="chips"><li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>PostgreSQL</li></ul>
+                <p class="project-note">Source not public yet. The flatmates have been informed.</p>
+              </article>
+
+              <article class="project" id="sirius" role="tabpanel" aria-labelledby="tab-sirius" data-body="star">
+                <div class="project-top"><h3>Sirius</h3><span class="status is-live">Open source</span></div>
+                <p class="named"><span>Named after the brightest star in the night sky.</span> It isn't the biggest, just well placed. That's what preparing does.</p>
+                <p>My interview-prep notebook: notes with code and maths, flashcards that come back just before you'd forget, and instant search. Everything stays on your own computer.</p>
+                <ul class="chips"><li>Go</li><li>Fiber</li><li>SQLite</li><li>React</li></ul>
+                <p class="project-links"><a href="https://github.com/pruthvipanchal/Sirius" target="_blank" rel="noopener">Source code<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a></p>
+              </article>
+
+              <article class="project" id="codenebula" role="tabpanel" aria-labelledby="tab-codenebula" data-body="nebula">
+                <div class="project-top"><h3>CodeNebula</h3><span class="status is-live">Live</span></div>
+                <p class="named"><span>Named after a nebula, where stars are born.</span> This is where programmers start.</p>
+                <p>Learn C++, Go and Python one concept at a time: 968 C++ concepts across eight standards, each with a real example you can run. Explore the C++ standards as a 3D galaxy, and run code right in your browser.</p>
+                <ul class="chips"><li>C++</li><li>Go</li><li>Python</li><li>Next.js</li><li>Three.js</li></ul>
+                <p class="project-links">
+                  <a href="https://codenebula-dev.vercel.app/" target="_blank" rel="noopener">Open CodeNebula<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                  <a href="https://pruthvipanchal.github.io/CodeNebula/" target="_blank" rel="noopener">Reference docs<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                  <a href="https://github.com/pruthvipanchal/CodeNebula" target="_blank" rel="noopener">Source code<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                </p>
+              </article>
+
+              <article class="project" id="gravitone" role="tabpanel" aria-labelledby="tab-gravitone" data-body="hole">
+                <div class="project-top"><h3>Gravitone</h3><span class="status">Private beta</span></div>
+                <p class="named"><span>Named after gravity + tone.</span> Gravity holds planets in one orbit; Gravitone holds every phone in the room on one beat.</p>
+                <p>Turns every phone and laptop in a room into one big speaker, in sync to the millisecond. Nothing to install.</p>
+                <ul class="chips"><li>Go</li><li>WebSocket</li><li>Web Audio</li><li>Next.js</li></ul>
+                <p class="project-note">Built on the open-source <a href="https://github.com/freeman-jiang/beatsync" target="_blank" rel="noopener">Beatsync</a>, with a new Go server and design.</p>
+              </article>
+
+              <article class="project" id="quasar" role="tabpanel" aria-labelledby="tab-quasar" data-body="quasar">
+                <div class="project-top"><h3>Quasar</h3><span class="status">Private MVP</span></div>
+                <p class="named"><span>Named after quasars,</span> the brightest beacons in the universe, seen across billions of light-years.</p>
+                <p>Scan a QR code and the links and notes you send from your phone appear on your laptop instantly, end-to-end encrypted.</p>
+                <ul class="chips"><li>Go</li><li>WebRTC</li><li>WebCrypto</li><li>React</li></ul>
+                <p class="project-note">Source not public yet. File sharing is next.</p>
+              </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-inner" data-reveal>
+        <p class="kicker">Contact</p>
+        <h2 id="contact-title">Let's build something fast.</h2>
+        <p class="lead">Hiring for trading systems or Go services, or got a problem that needs to be quick? I'd love to hear from you.</p>
+        <div class="contact-email">
+          <a class="email-link" href="mailto:pruthvipanchal46@gmail.com">pruthvipanchal46@gmail.com</a>
+          <button class="btn btn-small btn-ghost" type="button" data-copy="pruthvipanchal46@gmail.com">Copy</button>
+          <span class="visually-hidden" role="status" data-copy-status></span>
+        </div>
+        <div class="contact-links">
+          <a class="btn btn-ghost" href="https://linkedin.com/in/pruthvipanchal" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+          <a class="btn btn-ghost" href="https://github.com/pruthvipanchal" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+          <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" download><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume</a>
+        </div>
+        <p class="contact-clock" data-clock>Based in Gandhinagar, India (IST, UTC+05:30)</p>
+      </div>
+      <div class="horizon" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>&copy; <span data-year>2026</span> Pruthvi Panchal. Made on Earth, which is what Pruthvi means.</p>
+      <p class="foot-small">Hand-written HTML, CSS and JavaScript<span data-loadtime></span>. Map: Natural Earth.<span class="js-only foot-tip"> Tip: press <kbd>Ctrl</kbd> <kbd>K</kbd> to jump anywhere.</span></p>
+      <a class="to-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Command palette (Ctrl/⌘ + K or "/"), built by main.js -->
+  <dialog class="palette" data-palette aria-label="Command palette">
+    <div class="palette-box">
+      <div class="palette-input">
+        <svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg>
+        <input type="text" data-palette-input role="combobox" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" aria-label="Type a command" placeholder="Jump anywhere, open a project, or try “race”" autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <p class="palette-msg" data-palette-msg role="status" hidden></p>
+      <ul class="palette-list" id="palette-list" role="listbox" aria-label="Commands" data-palette-list></ul>
+      <p class="palette-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> run</span><span class="palette-psst">psst: try “sudo”</span></p>
+    </div>
+  </dialog>
+
+  <!-- "Can you beat 250µs?" reaction race -->
+  <dialog class="race" data-race aria-labelledby="race-title">
+    <div class="race-box">
+      <div class="race-head">
+        <h2 id="race-title">Can you beat 250 µs?</h2>
+        <button class="icon-btn" type="button" data-race-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="race-lead">My order system handles an order in 250 microseconds on average. Hit the pad the moment it turns green.</p>
+      <button class="race-pad" type="button" data-race-pad data-state="idle">
+        <span class="race-pad-big" data-race-big>Start</span>
+        <span class="race-pad-small" data-race-small>Click, tap or press Space</span>
+      </button>
+      <p class="race-verdict" data-race-verdict role="status"></p>
+      <dl class="race-stats">
+        <div><dt>You</dt><dd data-race-you>—</dd></div>
+        <div><dt>My order system</dt><dd>0.25 ms</dd></div>
+        <div><dt>Your best</dt><dd data-race-best>—</dd></div>
+      </dl>
+    </div>
+  </dialog>
+</body>
+</html>
