@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pruthvi Panchal | Software Engineer, Go &amp; C++ Trading Systems</title>
-  <meta name="description" content="Software engineer with 4 years in fintech. I build real-time trading systems in Go and C++: 17 microservices serving 20,000+ people at once, with orders handled in 250 microseconds.">
+  <title>Pruthvi Panchal | Go, Distributed Systems &amp; Low-Latency Engineer</title>
+  <meta name="description" content="Engineering systems where every microsecond matters. Software engineer with 4 years in fintech, building Go and C++ trading systems: 17 microservices serving 20,000+ concurrent users, with orders handled in 250 microseconds on average.">
   <meta name="author" content="Pruthvi Panchal">
   <link rel="canonical" href="https://pruthvip.tech/">
   <meta name="color-scheme" content="dark light">
@@ -13,17 +13,17 @@
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="pruthvip.tech">
   <meta property="og:url" content="https://pruthvip.tech/">
-  <meta property="og:title" content="Pruthvi Panchal | Software Engineer">
-  <meta property="og:description" content="I build lightning-fast trading systems in Go and C++: 17 microservices, 20,000+ people online at once, 250µs per order.">
+  <meta property="og:title" content="Pruthvi Panchal | Go, Distributed Systems &amp; Low-Latency Engineer">
+  <meta property="og:description" content="Engineering systems where every microsecond matters. Go and C++ trading systems: 20,000+ concurrent users, 250 µs per order on average.">
   <meta property="og:image" content="https://pruthvip.tech/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Pruthvi Panchal, software engineer, beside a glowing dotted Earth with Gandhinagar marked">
+  <meta property="og:image:alt" content="Pruthvi Panchal: engineering systems where every microsecond matters. Beside the name, a glowing dotted Earth with Gandhinagar marked">
   <meta property="profile:first_name" content="Pruthvi">
   <meta property="profile:last_name" content="Panchal">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pruthvi Panchal | Software Engineer">
-  <meta name="twitter:description" content="I build lightning-fast trading systems in Go and C++: 17 microservices, 20,000+ people online at once, 250µs per order.">
+  <meta name="twitter:title" content="Pruthvi Panchal | Go, Distributed Systems &amp; Low-Latency Engineer">
+  <meta name="twitter:description" content="Engineering systems where every microsecond matters. Go and C++ trading systems: 20,000+ concurrent users, 250 µs per order on average.">
   <meta name="twitter:image" content="https://pruthvip.tech/assets/og-image.png">
 
   <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -137,9 +137,10 @@
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="kicker hero-kicker">Software engineer · Gandhinagar, India</p>
+          <p class="kicker hero-kicker"><span>Go · <span class="nowrap">Distributed systems</span> · <span class="nowrap">Low-latency infrastructure</span></span></p>
           <h1 id="hero-title" class="hero-title"><span class="line"><span>Pruthvi</span></span><span class="line"><span>Panchal</span></span></h1>
-          <p class="hero-lead">I build lightning-fast trading systems in Go and C++, used by more than 20,000 people at the same time.</p>
+          <p class="hero-tagline">Engineering systems where <em>every microsecond</em> matters.</p>
+          <p class="hero-lead">I build Go and C++ trading systems that serve <b>20,000+ concurrent users</b> and handle orders in <b>250&nbsp;µs</b> on average.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="mailto:pruthvipanchal46@gmail.com">
               <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Email me
@@ -160,7 +161,7 @@
           <canvas class="earth-canvas js-only" data-earth role="img" aria-label="A glowing dotted Earth, turned to show India, with Gandhinagar marked. Drag to spin it."></canvas>
           <button class="earth-pin js-only" type="button" data-pin hidden aria-describedby="pin-tip">
             <span class="pin-dot" aria-hidden="true"></span>
-            <span class="pin-label">Gandhinagar <b>· I'm here</b></span>
+            <span class="pin-label"><svg class="icon pin-sky" aria-hidden="true"><use href="#i-sun" data-pin-sky/></svg><span><span data-pin-time></span><span class="pin-place"> in Gandhinagar</span></span></span>
           </button>
           <p class="pin-tip" id="pin-tip" role="tooltip" data-pin-tip hidden>Gandhinagar, Gujarat. I live here and work in GIFT City, India's international finance hub.</p>
           <div class="earth-fallback" aria-hidden="true"></div>
@@ -187,7 +188,7 @@
         </div>
         <div class="stat" data-reveal>
           <p class="stat-num"><span data-count="250">250</span><i>µs</i></p>
-          <p class="stat-label">Average order time: a quarter of a millisecond. <button class="link-btn js-only" type="button" data-race-open>Can you beat it?</button></p>
+          <p class="stat-label">Average order time<span class="stat-more">: a quarter of a millisecond</span>. <button class="link-btn js-only" type="button" data-race-open>Can you beat it?</button></p>
         </div>
       </div>
     </section>
@@ -342,15 +343,28 @@
         <div class="how">
           <div class="how-copy" data-reveal>
             <h3>See how it works</h3>
-            <p>Prices come in from the exchange and stream out to users. Orders and payments become events. Everything travels on one message bus.</p>
-            <p class="how-try js-only"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg><span><b>Try it:</b> click any box to switch it off. Its messages wait safely, then catch up when you turn it back on.</span></p>
+            <p>Six Go services from the trading platform I build, all talking over one NATS JetStream message bus.</p>
           </div>
 
-          <figure class="topo" data-reveal aria-label="Diagram of the trading platform: market data and order events moving between Go microservices over a NATS JetStream bus">
+          <figure class="topo" data-reveal aria-label="Diagram of the trading platform: prices and order events moving between six Go microservices over a NATS JetStream bus">
             <svg class="topo-svg" viewBox="0 0 420 316" aria-hidden="true">
+              <defs>
+                <marker id="ta" class="t-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1.4 9 5 1 8.6Z"/></marker>
+                <marker id="ta-off" class="t-arrow t-arrow-off" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1.4 9 5 1 8.6Z"/></marker>
+              </defs>
+              <!-- Each link points the way its messages flow. data-for names the service it belongs to,
+                   so the link can show that service switched off. -->
               <g class="t-links">
-                <path d="M70 36V64M210 36V64M350 36V64M70 114V160M210 114V160M350 114V160M70 206V252M210 206V252M350 206V252"/>
-                <path class="t-fan" d="M210 64L170 36M210 64L190 36M210 64L230 36M210 64L250 36"/>
+                <path class="t-link" data-for="md" d="M70 36V63"/>
+                <path class="t-link" data-for="md" d="M70 114V159"/>
+                <path class="t-link" data-for="bc" d="M210 160V115"/>
+                <path class="t-link" data-for="bc" d="M210 64V37"/>
+                <path class="t-fan" data-for="bc" d="M210 64L170 36M210 64L190 36M210 64L230 36M210 64L250 36"/>
+                <path class="t-link" data-for="or" d="M350 36V63"/>
+                <path class="t-link" data-for="or" d="M350 114V159"/>
+                <path class="t-link" data-for="nt" d="M210 206V251"/>
+                <path class="t-link" data-for="sr" d="M350 206V251"/>
+                <path class="t-link" data-for="pay" d="M70 252V207"/>
               </g>
               <g class="t-ext">
                 <rect x="12" y="8" width="116" height="28" rx="8"/>
@@ -375,7 +389,9 @@
             <figcaption class="topo-foot">
               <span class="legend"><i class="lg lg-md"></i>prices</span>
               <span class="legend"><i class="lg lg-ev"></i>orders &amp; events</span>
-              <span class="topo-note" data-topo-status>all systems running</span>
+              <span class="legend js-only"><i class="lg-off"></i>off</span>
+              <span class="legend js-only"><i class="lg-wait">3</i>waiting</span>
+              <span class="topo-note"><i class="topo-dot" aria-hidden="true"></i><span data-topo-status>all systems running</span><span class="js-only" data-topo-hint> · click a box to switch it off</span><button class="topo-reset" type="button" data-topo-reset hidden>turn all back on</button></span>
             </figcaption>
           </figure>
         </div>
@@ -479,7 +495,6 @@
                 <p class="named"><span>Named after gravity + tone.</span> Gravity holds planets in one orbit; Gravitone holds every phone in the room on one beat.</p>
                 <p>Turns every phone and laptop in a room into one big speaker, in sync to the millisecond. Nothing to install.</p>
                 <ul class="chips"><li>Go</li><li>WebSocket</li><li>Web Audio</li><li>Next.js</li></ul>
-                <p class="project-note">Built on the open-source <a href="https://github.com/freeman-jiang/beatsync" target="_blank" rel="noopener">Beatsync</a>, with a new Go server and design.</p>
               </article>
 
               <article class="project" id="quasar" role="tabpanel" aria-labelledby="tab-quasar" data-body="quasar">

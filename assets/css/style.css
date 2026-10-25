@@ -355,11 +355,14 @@ html:not(.js) .bar, .bar.is-scrolled, .bar[data-menu-open] {
   background: radial-gradient(closest-side, var(--hero-glow), transparent 72%);
   pointer-events: none;
 }
-.hero-grid { position: relative; display: grid; gap: 12px; align-items: center; }
+.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: center; }
 @media (min-width: 1000px) { .hero-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px; } }
 
-.hero-kicker { animation: fade-up .9s .05s var(--ease) both; }
+/* The kicker names the roles; it wraps between phrases, and the dot stays on the first line. */
+.hero-kicker { align-items: baseline; animation: fade-up .9s .05s var(--ease) both; }
+.nowrap { white-space: nowrap; }
 @media (max-width: 479.98px) { .hero-kicker { letter-spacing: .07em; } }
+@media (max-width: 359.98px) { .hero-kicker { font-size: .68rem; letter-spacing: .04em; } }
 .hero-title {
   margin-top: 20px;
   font-size: clamp(3.3rem, 1.1rem + 7.4vw, 7rem);
@@ -371,28 +374,50 @@ html:not(.js) .bar, .bar.is-scrolled, .bar[data-menu-open] {
 .hero-title .line { display: block; overflow: hidden; padding-bottom: .05em; }
 .hero-title .line > span { display: block; animation: rise 1s .1s var(--ease) both; }
 .hero-title .line + .line > span { animation-delay: .2s; }
+/* The headline under the name, then the proof for it. */
+.hero-tagline {
+  max-width: 17em;
+  margin-top: 22px;
+  font-size: clamp(1.5rem, 1.1rem + 1.35vw, 2.3rem);
+  font-weight: 650;
+  font-stretch: 106%;
+  line-height: 1.14;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+  animation: fade-up .9s .3s var(--ease) both;
+}
+.hero-tagline em { color: var(--amber-text); font-style: normal; }
 .hero-lead {
-  max-width: 28em;
-  margin-top: 24px;
+  max-width: 30em;
+  margin-top: 16px;
   color: var(--text-2);
-  font-size: clamp(1.12rem, 1rem + .4vw, 1.32rem);
+  font-size: clamp(1.04rem, .98rem + .3vw, 1.2rem);
   line-height: 1.55;
-  animation: fade-up .9s .35s var(--ease) both;
+  animation: fade-up .9s .4s var(--ease) both;
 }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; animation: fade-up .9s .45s var(--ease) both; }
+.hero-lead b { color: var(--text); font-weight: 600; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; animation: fade-up .9s .5s var(--ease) both; }
+/* On phones the four buttons share one row; below 400px the two wide ones drop their icons to fit. */
 @media (max-width: 479.98px) {
-  .hero-actions { display: grid; grid-template-columns: 1fr 1fr 46px 46px; gap: 8px; }
-  .hero-actions .btn { padding: 0 10px; }
-  .hero-actions .btn-square { width: 46px; }
+  .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 46px 46px; gap: 8px; margin-top: 28px; }
+  .hero-actions .btn { height: 46px; gap: 8px; padding: 0 8px; border-radius: 13px; font-size: .97rem; }
+  .hero-actions .btn-square { width: 46px; padding: 0; }
 }
+@media (max-width: 399.98px) { .hero-actions .btn:not(.btn-square) .icon { display: none; } }
 
 @keyframes rise { from { transform: translateY(105%); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } }
 
 /* The Earth (main.js draws it on the canvas) */
-.hero-earth { position: relative; height: clamp(360px, 96vw, 560px); }
+.hero-earth { position: relative; height: clamp(300px, 88vw, 560px); }
 @media (min-width: 1000px) {
   .hero-earth { width: calc(100% + 8vw); height: min(780px, calc(100svh - 110px)); min-height: 560px; margin-right: -8vw; }
+}
+/* Phones: the stage is cut to the globe, and main.js sets the planet down just above the line
+   under it (--hint-room is the space that line needs), so there's no gap to scroll past. */
+@media (max-width: 639.98px) {
+  .hero-earth { --hint-room: 44px; height: calc(64vw + 44px); }
+  .earth-hint { bottom: 8px; }
 }
 .earth-canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
 .earth-canvas.is-dragging { cursor: grabbing; }
@@ -424,8 +449,20 @@ html:not(.js) .bar, .bar.is-scrolled, .bar[data-menu-open] {
   font-weight: 600;
   transition: border-color .2s, background-color .2s;
 }
-.pin-label b { color: var(--amber-text); font-weight: 600; }
+/* The chip is a live clock: a Sun by day, a Moon by night (main.js keeps both current). */
+.pin-label { display: inline-flex; align-items: center; gap: 7px; font-variant-numeric: tabular-nums; }
+.pin-sky { width: 15px; height: 15px; color: var(--amber-text); stroke-width: 2; }
+.pin-place { color: var(--text-2); font-weight: 500; }
+.earth-pin.is-night .pin-label { border-color: rgba(90, 169, 255, .45); }
+.earth-pin.is-night .pin-sky { color: var(--blue-2); }
 .earth-pin:hover .pin-label, .earth-pin[aria-expanded="true"] .pin-label { border-color: var(--amber); background: var(--chip-strong); }
+/* On a phone the globe is small, so the chip shows just the time. */
+@media (max-width: 479.98px) {
+  .earth-pin { gap: 6px; }
+  .pin-label { gap: 6px; padding: 4px 10px; font-size: .78rem; }
+  .pin-sky { width: 13px; height: 13px; }
+  .pin-place { display: none; }
+}
 .pin-tip {
   position: absolute;
   left: 0; top: 0;
@@ -480,6 +517,8 @@ html:not(.js) .earth-fallback {
 .scroll-cue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--amber); animation: cue 1.8s var(--ease) infinite; }
 @keyframes cue { 0% { transform: translateY(0); opacity: 1; } 80%, 100% { transform: translateY(14px); opacity: 0; } }
 @media (max-width: 999.98px), (max-height: 700px) { .scroll-cue { display: none; } }
+/* Stacked (phones, tablets): no full-screen minimum, so no empty band under the globe. */
+@media (max-width: 999.98px) { .hero { min-height: 0; padding-bottom: 20px; } }
 
 /* At a glance ----------------------------------------------------------- */
 
@@ -504,6 +543,13 @@ html:not(.js) .earth-fallback {
 }
 .stat-num i { margin-left: 3px; color: var(--amber-text); font-size: .55em; font-style: normal; letter-spacing: 0; }
 .stat-label { max-width: 16em; margin-top: 10px; color: var(--text-2); font-size: .95rem; line-height: 1.5; }
+.stat-label .link-btn { display: flex; width: fit-content; margin-top: 4px; }
+@media (max-width: 899.98px) { .stat-more { display: none; } }
+@media (max-width: 639.98px) {
+  .stat { padding: 22px 12px 24px 0; }
+  .stat:nth-child(2n) { padding-left: 16px; }
+  .stat-label { margin-top: 8px; font-size: .9rem; }
+}
 
 /* Sections ------------------------------------------------------------ */
 
@@ -518,6 +564,10 @@ html:not(.js) .earth-fallback {
   letter-spacing: -.03em;
 }
 .section-head { margin-bottom: 44px; }
+@media (max-width: 639.98px) {
+  .section { padding-top: 76px; }
+  .section-head { margin-bottom: 30px; }
+}
 
 /* About */
 .about-grid { display: grid; gap: 40px; }
@@ -539,6 +589,10 @@ html:not(.js) .earth-fallback {
 .focus-icon .icon { width: 22px; height: 22px; }
 .focus h3 { font-size: 1.08rem; font-weight: 650; }
 .focus p { margin-top: 2px; color: var(--text-2); font-size: .96rem; line-height: 1.5; }
+@media (max-width: 479.98px) {
+  .focus li { grid-template-columns: 42px minmax(0, 1fr); gap: 14px; padding: 14px 16px; }
+  .focus-icon { width: 42px; height: 42px; border-radius: 12px; }
+}
 
 /* Experience: a timeline */
 .timeline { position: relative; }
@@ -580,7 +634,14 @@ html:not(.js) .earth-fallback {
 .company h3 { font-size: clamp(1.25rem, 1.05rem + .6vw, 1.55rem); font-weight: 700; font-stretch: 106%; line-height: 1.2; letter-spacing: -.015em; }
 .tl-org { margin-top: 4px; color: var(--amber-text); font-size: .95rem; font-weight: 500; }
 .tl-org span { white-space: nowrap; }
-@media (max-width: 479.98px) { .tl-card { padding: 20px 18px 22px; } }
+/* Phones: a slimmer thread and tighter cards, so the text gets the width. */
+@media (max-width: 479.98px) {
+  .timeline::before { left: 5px; }
+  .tl-item { padding-left: 26px; }
+  .tl-item::before { top: 5px; width: 12px; height: 12px; }
+  .tl-item.is-now::before { box-shadow: 0 0 0 4px var(--green-soft); }
+  .tl-card { padding: 18px 16px 20px; }
+}
 
 /* Roles at one company hang on one thread inside its card, newest first. */
 .roles { display: grid; gap: 26px; margin-top: 20px; }
@@ -609,6 +670,12 @@ html:not(.js) .earth-fallback {
 .role ul li { position: relative; padding-left: 18px; color: var(--text-2); line-height: 1.55; }
 .role ul li::before { content: ""; position: absolute; left: 1px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
 .role b { color: var(--text); font-weight: 600; }
+@media (max-width: 479.98px) {
+  .roles { gap: 22px; margin-top: 18px; }
+  .role { padding-left: 22px; }
+  .role:not(:last-child)::after { bottom: -24px; }
+  .role ul li { padding-left: 16px; font-size: .96rem; }
+}
 
 .edu { margin-top: 18px; }
 @media (min-width: 900px) { .edu { margin-left: 236px; } }
@@ -639,37 +706,39 @@ html:not(.js) .earth-fallback {
 .card h3 { margin-top: 20px; font-size: 1.16rem; font-weight: 650; }
 .card > p:not([class]) { margin-top: 6px; color: var(--text-2); font-size: .98rem; line-height: 1.55; }
 .card .link-btn { margin-top: 16px; }
+@media (max-width: 479.98px) {
+  .card { padding: 20px 20px 22px; }
+  .card-icon { width: 42px; height: 42px; border-radius: 12px; }
+  .card-num { margin-top: 18px; }
+  .card h3 { margin-top: 16px; }
+}
 
 /* See how it works: the platform diagram */
-.how { display: grid; gap: 28px; margin-top: 72px; }
-@media (min-width: 1000px) { .how { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 56px; align-items: center; } }
+.how { --topo-w: 600px; display: grid; gap: 28px; margin-top: 72px; } /* --topo-w: the diagram's width */
+@media (max-width: 639.98px) { .how { gap: 24px; margin-top: 56px; } }
+@media (min-width: 1000px) { .how { grid-template-columns: minmax(0, 1fr) minmax(0, var(--topo-w)); gap: 64px; align-items: center; } }
 .how h3 { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem); font-weight: 680; font-stretch: 108%; letter-spacing: -.025em; }
 .how-copy > p:not([class]) { margin-top: 14px; color: var(--text-2); font-size: 1.05rem; }
-.how-try {
-  display: flex;
-  gap: 12px;
-  margin-top: 22px;
-  padding: 14px 16px;
-  border: 1px solid rgba(255, 181, 71, .3);
-  border-radius: 14px;
-  background: var(--amber-soft);
-  color: var(--text);
-  font-size: .98rem;
-  line-height: 1.5;
-}
-.how-try .icon { margin-top: 2px; color: var(--amber-text); }
-.how-try b { color: var(--amber-text); }
 
+/* The drawing scales with its box, so the box is capped: wider would blow the labels up past body text. */
 .topo {
   position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: var(--topo-w);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--card-bg);
 }
 .topo-svg { width: 100%; height: auto; padding: 22px 18px 14px; }
 .topo-svg text { font-family: var(--mono); text-anchor: middle; }
-.t-links path { fill: none; stroke: rgba(140, 170, 255, .28); stroke-width: 1; }
-.t-links .t-fan { stroke-dasharray: 2 3; }
+/* Thin links with small arrowheads that point the way messages flow. */
+.t-link { fill: none; stroke: rgba(140, 170, 255, .28); stroke-width: 1; marker-end: url(#ta); transition: stroke .3s; }
+.t-fan { fill: none; stroke: rgba(140, 170, 255, .28); stroke-width: 1; stroke-dasharray: 2 3; transition: stroke .3s; }
+.t-arrow { fill: rgba(150, 180, 255, .6); }
+.t-arrow-off { fill: var(--red); }
+.t-link.is-off { stroke: var(--red); stroke-opacity: .6; stroke-dasharray: 3 3; marker-end: url(#ta-off); }
+.t-fan.is-off { stroke: var(--red); stroke-opacity: .35; }
 .t-ext rect { fill: var(--ghost); stroke: rgba(140, 170, 255, .3); stroke-dasharray: 3 3; }
 .t-ext text { fill: var(--text-2); font-size: 10.5px; }
 .t-bus { fill: rgba(90, 169, 255, .06); stroke: rgba(90, 169, 255, .35); }
@@ -691,8 +760,17 @@ html:not(.js) .earth-fallback {
 .t-node[role="button"]:focus-visible rect { stroke: var(--amber); stroke-width: 2; }
 .t-node.is-down rect, .t-node[role="button"].is-down:hover rect { fill: var(--red-soft); stroke: var(--red); stroke-dasharray: 4 3; }
 .t-node.is-down .t-name, .t-node.is-down .t-sub, .t-node.is-down .t-ok { fill: var(--red); }
+/* Still running, but everything that feeds it is off, so nothing new arrives. */
+.t-node.is-idle rect { stroke-dasharray: 2 3; }
+.t-node.is-idle .t-sub { fill: var(--amber-text); }
+/* One service glows softly until the visitor tries the diagram. */
+@media (prefers-reduced-motion: no-preference) {
+  .t-node.is-suggested rect { animation: t-suggest 2.4s ease-in-out infinite; }
+}
+@keyframes t-suggest { 50% { stroke: rgba(255, 181, 71, .8); } }
 .t-queue rect { fill: var(--queue-fill); stroke: var(--red); }
 .t-queue text { fill: var(--red); font-size: 9px; font-weight: 600; }
+.t-queue-in { transform-box: fill-box; transform-origin: center; }
 
 .topo-foot {
   display: flex;
@@ -705,11 +783,18 @@ html:not(.js) .earth-fallback {
   font-family: var(--mono);
   font-size: .74rem;
 }
-.topo-note { margin-left: auto; color: var(--text-2); }
 .legend { display: inline-flex; align-items: center; gap: 8px; }
 .lg { width: 8px; height: 8px; border-radius: 50%; }
 .lg-md { background: var(--amber); }
 .lg-ev { background: var(--green); }
+.lg-off { flex: none; width: 13px; height: 9px; border: 1px dashed var(--red); border-radius: 2px; background: var(--red-soft); }
+.lg-wait { flex: none; display: inline-grid; place-items: center; min-width: 16px; height: 12px; padding: 0 4px; border: 1px solid var(--red); border-radius: 6px; background: var(--queue-fill); color: var(--red); font-size: .6rem; font-style: normal; font-weight: 600; line-height: 1; }
+/* The live status line: health, the one instruction, and a way back when anything is off. */
+.topo-note { margin-left: auto; color: var(--text-2); }
+.topo-dot { display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--green); vertical-align: .1em; transition: background-color .3s; }
+.topo.is-degraded .topo-dot { background: var(--red); }
+.topo-reset { margin-left: 10px; color: var(--amber-text); font-family: var(--mono); font-size: inherit; text-decoration: underline; text-decoration-color: rgba(255, 181, 71, .45); text-underline-offset: 3px; }
+.topo-reset:hover { text-decoration-color: var(--amber); }
 
 .topo-tip {
   position: absolute;
@@ -737,6 +822,7 @@ html:not(.js) .earth-fallback {
   .t-bus-label { font-size: 11px; }
   .t-queue text { font-size: 11px; }
   .topo-note { flex-basis: 100%; margin-left: 0; }
+  .topo-tip { max-width: 220px; font-size: .8rem; }
 }
 
 /* Skills */
@@ -745,6 +831,13 @@ html:not(.js) .earth-fallback {
 @media (min-width: 1000px) { .skills { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .skill-group { padding: 22px 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .skill-group h3 { margin-bottom: 14px; color: var(--text); font-size: 1rem; font-weight: 650; }
+@media (max-width: 479.98px) {
+  .skills { gap: 12px; }
+  .skill-group { padding: 18px 16px 20px; }
+  .skill-group h3 { margin-bottom: 12px; }
+  .chips { gap: 7px; }
+  .chips li { padding: 5px 11px; font-size: .85rem; }
+}
 
 /* Pruthvi's Universe: side projects orbit the Earth */
 .universe::before {
@@ -760,6 +853,9 @@ html:not(.js) .earth-fallback {
 @media (min-width: 1000px) { .uni { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: center; } }
 .uni-main { min-width: 0; }
 .orbit-stage { position: relative; aspect-ratio: 4 / 3; }
+/* Stacked layouts get a wider, shorter stage: the orbits are flat ellipses, so 4:3 leaves empty sky. */
+@media (max-width: 999.98px) { .orbit-stage { aspect-ratio: 16 / 9; } }
+@media (max-width: 559.98px) { .orbit-stage { aspect-ratio: 8 / 5; } }
 .orbit-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .orbit-labels { position: absolute; inset: 0; pointer-events: none; }
 .orbit-label {
@@ -847,6 +943,10 @@ html:not(.js) .panels { display: grid; gap: 16px; }
 .project-note { margin-top: 18px; color: var(--text-3); font-size: .92rem; }
 .project-note a { color: var(--text-2); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
 .project-note a:hover { text-decoration-color: var(--amber); }
+@media (max-width: 479.98px) {
+  .project { padding: 20px 18px 22px; }
+  .named { margin-top: 16px; padding: 12px 14px; font-size: .96rem; }
+}
 
 /* Contact, above the curve of the Earth */
 .contact { padding-bottom: clamp(180px, 24vw, 300px); overflow: hidden; }
@@ -870,6 +970,12 @@ html:not(.js) .panels { display: grid; gap: 16px; }
 .email-link:hover { color: var(--amber-text); text-decoration-color: var(--amber); }
 @media (max-width: 639.98px) { .email-link { font-size: clamp(1.15rem, 5.6vw, 2rem); font-stretch: 100%; } }
 .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+/* Phones: the three links share one row, like the hero buttons. */
+@media (max-width: 479.98px) {
+  .contact-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
+  .contact-links .btn { height: 46px; gap: 8px; padding: 0 8px; border-radius: 13px; font-size: .97rem; }
+}
+@media (max-width: 399.98px) { .contact-links .btn .icon { display: none; } }
 .contact-clock { margin-top: 28px; color: var(--text-3); font-family: var(--mono); font-size: .84rem; }
 .horizon {
   position: absolute;

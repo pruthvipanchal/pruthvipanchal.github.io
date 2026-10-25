@@ -13,6 +13,8 @@
   const recall = (key) => { try { return localStorage.getItem(key); } catch (e) { return null; } };
   const smooth = () => (reduceMotion.matches ? 'auto' : 'smooth');
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const IST = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true });
+  const gandhinagarTime = () => IST.format(new Date()); // "8:44 am"
 
   /* Theme: night by default, day one click away (remembered in this browser). ---- */
 
@@ -386,6 +388,8 @@
 
     const pin = stage.querySelector('[data-pin]');
     const tip = stage.querySelector('[data-pin-tip]');
+    const pinTime = pin.querySelector('[data-pin-time]');
+    const pinSky = pin.querySelector('[data-pin-sky]');
     let sprites = dotSprites(palette());
     const HOME = toVec(23.2156, 72.6369); // Gandhinagar
     // Cities across India that the arcs land on (an illustration of prices streaming out to users).
@@ -434,7 +438,6 @@
     let onScreen = false;
     let dragging = false;
     let sun = sunVector(Date.now());
-    let sunAt = Date.now();
     let stageLeft = 0; // layout numbers the pin needs, measured on resize rather than every frame
     let pinWidth = 0;
     let pageWidth = 0;
@@ -449,9 +452,12 @@
       dpr = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
-      R = Math.min(h * 0.38, w * 0.32);
+      // On phones the CSS leaves room for the line under the globe (--hint-room) and the planet sits
+      // right on top of it. Elsewhere it floats a little above the middle of its stage.
+      const room = parseFloat(getComputedStyle(stage).getPropertyValue('--hint-room')) || 0;
+      R = room ? Math.min((h - room - 16) / 2, w * 0.32) : Math.min(h * 0.38, w * 0.32);
       cx = w / 2;
-      cy = h * 0.46;
+      cy = room ? h - room - R : h * 0.46;
       dot = clamp(R * 0.017, 2.2, 5.6);
       stride = R < 170 ? 2 : 1;
     }
@@ -591,10 +597,20 @@
       if (!running) draw(performance.now());
     }
 
+    // The pin shows the time in Gandhinagar, with a Sun or a Moon worked out from the same
+    // Sun that lights the globe, so the chip and the day and night on the planet always agree.
+    function tickPin() {
+      sun = sunVector(Date.now());
+      const day = HOME[0] * sun[0] + HOME[1] * sun[1] + HOME[2] * sun[2] > 0; // the Sun is above Gandhinagar's horizon
+      pinSky.setAttribute('href', day ? '#i-sun' : '#i-moon');
+      pin.classList.toggle('is-night', !day);
+      pinTime.textContent = gandhinagarTime();
+      pinWidth = pin.offsetWidth;
+    }
+
     function draw(now) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-      if (Date.now() - sunAt > 60000) { sun = sunVector(Date.now()); sunAt = Date.now(); }
       const intro = reduceMotion.matches ? 1 : clamp((now - introStart) / 1900, 0, 1);
       const view = viewOf(state.lat, state.lon);
       placeMoon();
@@ -717,6 +733,8 @@
     // The Gandhinagar pin explains itself on hover, focus or tap.
     pin.hidden = false;
     pin.setAttribute('aria-expanded', 'false');
+    tickPin();
+    setInterval(() => { tickPin(); if (onScreen && !running) draw(performance.now()); }, 15000);
     pin.addEventListener('click', () => setTip(finePointer.matches || !tipOpen)); // hover already opened it on desktop
     pin.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') setTip(true); });
     pin.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') setTip(false); });
@@ -731,7 +749,12 @@
     } else {
       onScreen = true;
     }
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { stop(); return; }
+      tickPin(); // timers slow down in background tabs, so catch the clock up first
+      start();
+      if (onScreen && !running) draw(performance.now());
+    });
     onChange(reduceMotion, () => { if (reduceMotion.matches) { stop(); arcs = []; draw(performance.now()); } else start(); });
     const relayout = () => { resize(); if (!running) draw(performance.now()); };
     if ('ResizeObserver' in window) new ResizeObserver(relayout).observe(canvas); else window.addEventListener('resize', relayout);
@@ -814,6 +837,7 @@
     let w = 0;
     let h = 0;
     let dpr = 1;
+    let halves = [];
     let pace = 1;
     let earthLon = 60 * RAD;
     let raf = 0;
@@ -842,6 +866,7 @@
       dpr = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
+      halves = labels.map((l) => l.offsetWidth / 2); // labels near the edge stay inside the stage
     }
 
     function drawStar(x, y, r, t) {
@@ -976,12 +1001,13 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
       const t = now / 1000;
+      const narrow = w < 560; // phones get a shorter 8:5 stage
       const cx = w / 2;
-      const cy = h / 2;
+      const cy = h * (narrow ? 0.44 : 0.5); // labels hang below the worlds, so lift them a little
       const Rx = w * 0.47;
-      const squash = w < 560 ? 0.42 : 0.36;
-      const eR = Math.min(w, h) * 0.115;
-      const base = Math.min(w, h) * 0.022;
+      const squash = narrow ? 0.42 : 0.36;
+      const eR = w * 0.086;
+      const base = w * 0.0165;
 
       bodies.forEach((b, i) => {
         const rx = Rx * ORBITS[i];
@@ -1039,7 +1065,7 @@
         const top = b.y + b.r * 2.4 + 6;
         // A world passing behind the Earth hides its label too.
         const hidden = !b.front && Math.abs(b.x - cx) < eR * 1.5 && top < cy + eR * 1.2;
-        l.style.left = `${b.x.toFixed(1)}px`;
+        l.style.left = `${clamp(b.x, halves[i] + 2, w - halves[i] - 2).toFixed(1)}px`;
         l.style.top = `${top.toFixed(1)}px`;
         l.style.opacity = hidden ? '0' : b.front || i === current ? '1' : '.7';
         l.style.visibility = hidden ? 'hidden' : 'visible';
@@ -1107,6 +1133,7 @@
     onChange(reduceMotion, () => (reduceMotion.matches ? stop() : start()));
     const relayout = () => { resize(); draw(); };
     if ('ResizeObserver' in window) new ResizeObserver(relayout).observe(canvas); else window.addEventListener('resize', relayout);
+    document.fonts?.ready.then(relayout); // label widths change once Archivo arrives
     themeWatchers.push(() => { sprites = dotSprites(palette()); draw(); });
 
     if (reduceMotion.matches) angles[current] = FRONT;
@@ -1124,9 +1151,8 @@
   /* Local time in Gandhinagar ---------------------------------------------- */
 
   const clockEl = document.querySelector('[data-clock]');
-  if (clockEl && window.Intl) {
-    const fmt = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', hour12: true });
-    const tick = () => { clockEl.textContent = `It's ${fmt.format(new Date())} here in Gandhinagar right now.`; };
+  if (clockEl) {
+    const tick = () => { clockEl.textContent = `It's ${gandhinagarTime()} here in Gandhinagar right now.`; };
     tick();
     setInterval(tick, 15000);
   }
@@ -1203,9 +1229,14 @@
       sr: { name: 'search', what: 'Search, made 40% faster with Redis tuning.', door: [350, 252], badge: [350, 229], kind: 'md' },
     };
     const isConsumer = (id) => Boolean(INFO[id].door);
+    // Where each consumer's messages come from. With all of its sources off, it goes quiet.
+    const SOURCES = { bc: ['md'], sr: ['md'], nt: ['or', 'pay'] };
+    const starved = (id) => Boolean(SOURCES[id]?.every((s) => down.has(s)));
 
     const nodes = {};
     svg.querySelectorAll('[data-node]').forEach((g) => { nodes[g.getAttribute('data-node')] = g; });
+    const links = {}; // the arrows that belong to each service, so they can show it switched off
+    svg.querySelectorAll('[data-for]').forEach((el) => { (links[el.dataset.for] ||= []).push(el); });
 
     const route = (...points) => {
       const segs = [];
@@ -1291,12 +1322,13 @@
     function hold(id) {
       if (!down.has(id)) { spawn(REPLAY[id], INFO[id].kind, () => arrive(id)); return; } // it came back meanwhile
       held[id]++;
-      drawBadge(id);
+      drawBadge(id, true);
       refreshStatus();
       if (tipFor === id) showTip(id);
     }
 
-    function drawBadge(id) {
+    /** The "12 waiting" badge on a switched-off consumer's link; it bumps as each message joins. */
+    function drawBadge(id, bump = false) {
       let badge = badges[id];
       if (!held[id]) { badge?.remove(); delete badges[id]; return; }
       if (!badge) {
@@ -1305,9 +1337,15 @@
         badge.setAttribute('class', 't-queue');
         badge.setAttribute('transform', `translate(${x} ${y})`);
         badge.setAttribute('aria-hidden', 'true');
-        badge.append(document.createElementNS(NS, 'rect'), document.createElementNS(NS, 'text'));
+        const inner = document.createElementNS(NS, 'g'); // scaled for the bump; the outer group holds the position
+        inner.setAttribute('class', 't-queue-in');
+        inner.append(document.createElementNS(NS, 'rect'), document.createElementNS(NS, 'text'));
+        badge.append(inner);
         svg.insertBefore(badge, layer);
         badges[id] = badge;
+      }
+      if (bump && !reduceMotion.matches) {
+        badge.firstChild.animate?.([{ transform: 'scale(1.22)' }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
       }
       const text = badge.querySelector('text');
       text.textContent = `${held[id]} waiting`;
@@ -1426,22 +1464,51 @@
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
     onChange(reduceMotion, () => (reduceMotion.matches ? reset() : start()));
 
+    // With reduced motion nothing travels, but messages for a switched-off service still pile up.
+    setInterval(() => {
+      if (!reduceMotion.matches || !onScreen || document.hidden) return;
+      let changed = false;
+      down.forEach((id) => {
+        if (!isConsumer(id) || starved(id)) return;
+        held[id]++;
+        drawBadge(id);
+        changed = true;
+      });
+      if (changed) refreshStatus();
+    }, 1200);
+
     /* Switching services off and back on. */
 
     const verb = () => (finePointer.matches ? 'click' : 'tap');
     const statusEl = figure.querySelector('[data-topo-status]');
+    const hintEl = figure.querySelector('[data-topo-hint]');
+    const resetBtn = figure.querySelector('[data-topo-reset]');
     const live = document.createElement('span');
     live.className = 'visually-hidden';
     live.setAttribute('aria-live', 'polite');
     figure.append(live);
     let quietUntil = 0;
+    if (hintEl) hintEl.textContent = ` · ${verb()} a box to switch it off`;
 
+    /** The status line: overall health, and a way back when anything is off. */
     function refreshStatus() {
+      figure.classList.toggle('is-degraded', down.size > 0);
+      if (hintEl) hintEl.hidden = down.size > 0;
+      if (resetBtn) resetBtn.hidden = down.size === 0;
       if (!statusEl || Date.now() < quietUntil) return;
       const waiting = held.bc + held.nt + held.sr;
       statusEl.textContent = down.size
-        ? `${down.size} switched off${waiting ? ` · ${waiting} messages waiting` : ''} · ${verb()} to turn back on`
-        : `all systems running · ${verb()} a box to switch it off`;
+        ? `${down.size} switched off${waiting ? ` · ${waiting} waiting` : ''}`
+        : 'all systems running';
+    }
+
+    /** A consumer whose sources are all off stays on, but shows that nothing new is coming. */
+    function refreshIdle() {
+      Object.keys(SOURCES).forEach((id) => {
+        const idle = !down.has(id) && starved(id);
+        nodes[id].classList.toggle('is-idle', idle);
+        if (!down.has(id)) setSub(id, idle ? (id === 'nt' ? 'no new events' : 'no new prices') : null);
+      });
     }
 
     function announce(text) {
@@ -1459,38 +1526,58 @@
     }
 
     function label(id) {
-      const state = down.has(id) ? 'switched off. Press to turn it back on' : 'running. Press to switch it off';
+      const state = down.has(id)
+        ? 'switched off. Press to turn it back on'
+        : `${starved(id) ? 'running, but nothing new is arriving' : 'running'}. Press to switch it off`;
       nodes[id].setAttribute('aria-label', `${INFO[id].name}, ${state}. ${INFO[id].what}`);
     }
 
     function takeDown(id) {
       down.add(id);
-      nodes[id].classList.remove('is-hit', 'ev');
+      nodes[id].classList.remove('is-hit', 'ev', 'is-idle');
       delete hitUntil[id];
       nodes[id].classList.add('is-down');
-      setSub(id, 'off');
+      links[id]?.forEach((l) => l.classList.add('is-off'));
+      setSub(id, 'switched off');
       announce(isConsumer(id)
-        ? `${INFO[id].name} is off. Its messages are waiting safely.`
+        ? `${INFO[id].name} is off. Its messages wait safely in JetStream.`
         : `${INFO[id].name} is off: ${INFO[id].stops}.`);
     }
 
-    function restore(id) {
+    /** Turns a service back on and replays what waited for it. Returns how many messages that was. */
+    function restore(id, { quiet = false } = {}) {
       down.delete(id);
       nodes[id].classList.remove('is-down');
+      links[id]?.forEach((l) => l.classList.remove('is-off'));
       setSub(id, null);
       const n = held[id] || 0;
-      if (!n) { announce(`${INFO[id].name} is back on.`); return; }
-      held[id] = 0;
-      drawBadge(id);
-      for (let i = 0; i < Math.min(n, 30); i++) after(i * 75, () => spawn(REPLAY[id], INFO[id].kind, () => arrive(id, i)));
-      announce(`${INFO[id].name} is back. ${n} waiting message${n === 1 ? '' : 's'} delivered.`);
+      if (n) {
+        held[id] = 0;
+        drawBadge(id);
+        for (let i = 0; i < Math.min(n, 30); i++) after(i * 75, () => spawn(REPLAY[id], INFO[id].kind, () => arrive(id, i)));
+      }
+      if (!quiet) announce(n ? `${INFO[id].name} is back. ${n} waiting message${n === 1 ? '' : 's'} delivered.` : `${INFO[id].name} is back on.`);
+      return n;
+    }
+
+    function settle(id) {
+      Object.values(nodes).forEach((g) => g.classList.remove('is-suggested')); // they've found it
+      refreshIdle();
+      Object.keys(INFO).forEach(label);
+      refreshStatus();
+      if (id && tipFor === id) showTip(id);
     }
 
     function toggle(id) {
       if (down.has(id)) restore(id); else takeDown(id);
-      label(id);
-      if (tipFor === id) showTip(id);
+      settle(id);
     }
+
+    resetBtn?.addEventListener('click', () => {
+      const n = [...down].reduce((sum, id) => sum + restore(id, { quiet: true }), 0);
+      settle(null);
+      announce(n ? `everything is back on. ${n} waiting message${n === 1 ? '' : 's'} delivered.` : 'everything is back on.');
+    });
 
     const tip = document.createElement('div');
     tip.className = 'topo-tip';
@@ -1517,8 +1604,10 @@
       const fr = figure.getBoundingClientRect();
       const nr = nodes[id].getBoundingClientRect();
       const left = Math.max(8, Math.min(nr.left - fr.left + nr.width / 2 - tip.offsetWidth / 2, fr.width - tip.offsetWidth - 8));
-      let top = nr.top - fr.top - tip.offsetHeight - 8;
-      if (top < 8) top = nr.bottom - fr.top + 8;
+      // Open on the side away from the bus, so the tip never hides the queue it describes.
+      const lower = nr.top + nr.height / 2 > fr.top + fr.height / 2;
+      let top = lower ? nr.bottom - fr.top + 8 : nr.top - fr.top - tip.offsetHeight - 8;
+      if (!lower && top < 8) top = nr.bottom - fr.top + 8;
       tip.style.left = `${left}px`;
       tip.style.top = `${top}px`;
     }
@@ -1556,6 +1645,7 @@
       g.addEventListener('focus', () => showTip(id));
       g.addEventListener('blur', hideTip);
     });
+    nodes.nt?.classList.add('is-suggested'); // Notify is the fun one: its messages queue up
     refreshStatus();
     start();
 

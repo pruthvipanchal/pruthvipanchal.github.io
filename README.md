@@ -31,9 +31,9 @@ Double-click `index.html`. Everything works from the file system.
 
 All of these are optional extras in `assets/js/main.js`. Without JavaScript the page still reads in full; with reduced motion nothing moves on its own, but everything still works.
 
-- **Spin the Earth:** the hero is a dotted globe built from real coastlines and lit by the real Sun, so day and night fall exactly where they do right now. Drag it to spin it (sideways on a phone), hover or tap the Gandhinagar pin, and click the Moon to jump to Moonsplit. The amber arcs illustrate live prices streaming out of GIFT City.
+- **Spin the Earth:** the hero is a dotted globe built from real coastlines and lit by the real Sun, so day and night fall exactly where they do right now. The Gandhinagar pin is a live clock: it shows the time there with a Sun or a Moon worked out from that same sunlight, and hovering or tapping it says more. Drag the globe to spin it (sideways on a phone) and click the Moon to jump to Moonsplit. The amber arcs illustrate live prices streaming out of GIFT City.
 - **Pruthvi's Universe:** the side projects orbit a small Earth. Click a world, its label or a tab to open that project; the chosen one glides round to the front.
-- **See how it works:** click a service in the platform diagram to switch it off. Messages for a consumer (broadcast, notify, search) wait in JetStream with a "waiting" count, then catch up when you turn it back on.
+- **See how it works:** six services pass prices (amber dots) and orders and events (green dots) over the bus, and small arrows show which way each link flows. Click a service to switch it off. Messages for a consumer (broadcast, notify, search) wait in JetStream with a "waiting" count and catch up when it's back on; switching off a source (market-data, orders, payments) leaves the services it feeds idle. The status line under the diagram reports its health and can turn everything back on, next to a small legend.
 - **Can you beat 250µs?** A reaction race against the order system's average latency. Your best time is kept in this browser.
 - **Command palette:** Ctrl/⌘ + K, or `/`, to jump anywhere, open a project, spin the Earth or start the race. Type `sudo` for a surprise.
 
