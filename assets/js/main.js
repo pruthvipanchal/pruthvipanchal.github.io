@@ -1789,9 +1789,9 @@
       { group: 'Do', label: 'Download resume', keys: 'resume cv pdf', run: () => document.querySelector('a[download][href$=".pdf"]')?.click() },
       { group: 'Do', label: 'Switch theme', hint: 'day / night', keys: 'dark light mode', run: () => toggleTheme(themeBtn) },
       { group: 'Open', label: 'GitHub', hint: '@pruthvipanchal', run: visit('https://github.com/pruthvipanchal') },
-      { group: 'Open', label: 'LinkedIn', hint: '/in/pruthvipanchal', run: visit('https://linkedin.com/in/pruthvipanchal') },
+      { group: 'Open', label: 'LinkedIn', hint: '/in/pruthvipanchal', run: visit('https://www.linkedin.com/in/pruthvipanchal/') },
       { group: 'Open', label: 'CodeNebula', hint: 'live site', keys: 'learn c++ galaxy', run: visit('https://codenebula-dev.vercel.app/') },
-      { group: 'Open', label: 'CodeNebula reference', hint: 'docs', keys: 'docs reference', run: visit('https://pruthvipanchal.github.io/CodeNebula/') },
+      { group: 'Open', label: 'CodeNebula reference', hint: 'docs', keys: 'docs reference', run: visit('https://pruthvip.tech/CodeNebula/') },
       {
         group: 'Secret', label: 'sudo hire pruthvi', secret: true, keys: 'sudo hire', stay: true,
         run: () => {

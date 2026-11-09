@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+# The résumé carries a phone number, so it stays out of search results.
+# Visitors still download it from the page.
+Disallow: /assets/Pruthvi-Panchal-Resume.pdf
+Disallow: /tools/
+Disallow: /README.md
 
 Sitemap: https://pruthvip.tech/sitemap.xml
+Sitemap: https://pruthvip.tech/CodeNebula/sitemap.xml

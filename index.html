@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pruthvi Panchal | Go, Distributed Systems &amp; Low-Latency Engineer</title>
-  <meta name="description" content="Engineering systems where every microsecond matters. Software engineer with 4 years in fintech, building Go and C++ trading systems: 17 microservices serving 20,000+ concurrent users, with orders handled in 250 microseconds on average.">
+  <meta name="description" content="Pruthvi Panchal is a Go (Golang) and C++ engineer in GIFT City, India, building low-latency trading systems: 20,000+ concurrent users, orders in 250 µs.">
   <meta name="author" content="Pruthvi Panchal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://pruthvip.tech/">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#04060D">
@@ -25,6 +26,7 @@
   <meta name="twitter:title" content="Pruthvi Panchal | Go, Distributed Systems &amp; Low-Latency Engineer">
   <meta name="twitter:description" content="Engineering systems where every microsecond matters. Go and C++ trading systems: 20,000+ concurrent users, 250 µs per order on average.">
   <meta name="twitter:image" content="https://pruthvip.tech/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Pruthvi Panchal: engineering systems where every microsecond matters. Beside the name, a glowing dotted Earth with Gandhinagar marked">
 
   <link rel="icon" href="favicon.ico" sizes="32x32">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -47,23 +49,72 @@
   <script src="assets/js/earth-data.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 
+  <!-- Structured data for search engines. Keep it in step with the page, and bump
+       dateModified (and sitemap.xml's lastmod) when the text changes. CodeNebula's
+       reference at /CodeNebula/ names #person as its author, so keep that @id stable. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Pruthvi Panchal",
-    "url": "https://pruthvip.tech/",
-    "image": "https://pruthvip.tech/assets/og-image.png",
-    "jobTitle": "Software Engineer",
-    "worksFor": { "@type": "Organization", "name": "Greeksoft Technologies" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Gandhinagar", "addressRegion": "Gujarat", "addressCountry": "IN" },
-    "email": "mailto:pruthvipanchal46@gmail.com",
-    "alumniOf": [
-      { "@type": "CollegeOrUniversity", "name": "Parul University" },
-      { "@type": "CollegeOrUniversity", "name": "Gujarat Technological University" }
-    ],
-    "knowsAbout": ["Go", "C++", "Distributed systems", "Microservices", "Low-latency systems", "High-frequency trading", "NATS JetStream", "Kubernetes", "Redis", "PostgreSQL", "FIX protocol"],
-    "sameAs": ["https://linkedin.com/in/pruthvipanchal", "https://github.com/pruthvipanchal"]
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://pruthvip.tech/#website",
+        "url": "https://pruthvip.tech/",
+        "name": "Pruthvi Panchal",
+        "alternateName": "pruthvip.tech",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://pruthvip.tech/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://pruthvip.tech/#profilepage",
+        "url": "https://pruthvip.tech/",
+        "name": "Pruthvi Panchal | Go, Distributed Systems & Low-Latency Engineer",
+        "isPartOf": { "@id": "https://pruthvip.tech/#website" },
+        "mainEntity": { "@id": "https://pruthvip.tech/#person" },
+        "primaryImageOfPage": "https://pruthvip.tech/assets/og-image.png",
+        "dateCreated": "2026-10-25",
+        "dateModified": "2026-11-10",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://pruthvip.tech/#person",
+        "name": "Pruthvi Panchal",
+        "givenName": "Pruthvi",
+        "familyName": "Panchal",
+        "url": "https://pruthvip.tech/",
+        "image": "https://pruthvip.tech/assets/og-image.png",
+        "description": "Software engineer in GIFT City, India, building low-latency trading systems in Go and C++.",
+        "jobTitle": "Software Engineer",
+        "worksFor": { "@type": "Organization", "name": "Greeksoft Technologies" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Gandhinagar", "addressRegion": "Gujarat", "addressCountry": "IN" },
+        "email": "mailto:pruthvipanchal46@gmail.com",
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "Parul University" },
+          { "@type": "CollegeOrUniversity", "name": "Gujarat Technological University" }
+        ],
+        "knowsAbout": ["Go", "Golang", "C++", "Distributed systems", "Microservices", "Low-latency systems", "High-frequency trading", "NATS JetStream", "Kubernetes", "Redis", "PostgreSQL", "FIX protocol"],
+        "sameAs": ["https://www.linkedin.com/in/pruthvipanchal/", "https://github.com/pruthvipanchal"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://pruthvip.tech/CodeNebula/#website",
+        "name": "CodeNebula",
+        "url": "https://pruthvip.tech/CodeNebula/",
+        "description": "C++, Go and Python concepts with real-world scenarios and runnable examples.",
+        "creator": { "@id": "https://pruthvip.tech/#person" }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Sirius",
+        "url": "https://pruthvip.tech/#sirius",
+        "codeRepository": "https://github.com/pruthvipanchal/Sirius",
+        "description": "An interview-prep notebook: notes with code and maths, spaced-repetition flashcards and instant search, kept on your own computer.",
+        "programmingLanguage": ["Go", "TypeScript"],
+        "creator": { "@id": "https://pruthvip.tech/#person" }
+      }
+    ]
   }
   </script>
 </head>
@@ -121,7 +172,7 @@
           <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
           <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
         </button>
-        <a class="btn btn-small btn-ghost bar-resume" href="assets/Pruthvi-Panchal-Resume.pdf" download>
+        <a class="btn btn-small btn-ghost bar-resume" href="assets/Pruthvi-Panchal-Resume.pdf" rel="nofollow" download>
           <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume
         </a>
         <button class="icon-btn menu-toggle js-only" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
@@ -145,13 +196,13 @@
             <a class="btn btn-primary" href="mailto:pruthvipanchal46@gmail.com">
               <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Email me
             </a>
-            <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" download>
+            <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" rel="nofollow" download>
               <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume
             </a>
-            <a class="btn btn-ghost btn-square" href="https://linkedin.com/in/pruthvipanchal" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+            <a class="btn btn-ghost btn-square" href="https://www.linkedin.com/in/pruthvipanchal/" target="_blank" rel="me noopener" aria-label="LinkedIn profile">
               <svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>
             </a>
-            <a class="btn btn-ghost btn-square" href="https://github.com/pruthvipanchal" target="_blank" rel="noopener" aria-label="GitHub profile">
+            <a class="btn btn-ghost btn-square" href="https://github.com/pruthvipanchal" target="_blank" rel="me noopener" aria-label="GitHub profile">
               <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
             </a>
           </div>
@@ -409,7 +460,7 @@
         <div class="skills">
           <div class="skill-group" data-reveal>
             <h3>Languages</h3>
-            <ul class="chips"><li class="is-key">Go</li><li class="is-key">C++</li><li>JavaScript</li><li>PHP</li><li>SQL</li></ul>
+            <ul class="chips"><li class="is-key">Go (Golang)</li><li class="is-key">C++</li><li>JavaScript</li><li>PHP</li><li>SQL</li></ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>Backend &amp; messaging</h3>
@@ -485,7 +536,7 @@
                 <ul class="chips"><li>C++</li><li>Go</li><li>Python</li><li>Next.js</li><li>Three.js</li></ul>
                 <p class="project-links">
                   <a href="https://codenebula-dev.vercel.app/" target="_blank" rel="noopener">Open CodeNebula<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-                  <a href="https://pruthvipanchal.github.io/CodeNebula/" target="_blank" rel="noopener">Reference docs<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+                  <a href="https://pruthvip.tech/CodeNebula/" target="_blank" rel="noopener">Reference docs<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                   <a href="https://github.com/pruthvipanchal/CodeNebula" target="_blank" rel="noopener">Source code<svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
                 </p>
               </article>
@@ -521,9 +572,9 @@
           <span class="visually-hidden" role="status" data-copy-status></span>
         </div>
         <div class="contact-links">
-          <a class="btn btn-ghost" href="https://linkedin.com/in/pruthvipanchal" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
-          <a class="btn btn-ghost" href="https://github.com/pruthvipanchal" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
-          <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" download><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/pruthvipanchal/" target="_blank" rel="me noopener"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+          <a class="btn btn-ghost" href="https://github.com/pruthvipanchal" target="_blank" rel="me noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+          <a class="btn btn-ghost" href="assets/Pruthvi-Panchal-Resume.pdf" rel="nofollow" download><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Resume</a>
         </div>
         <p class="contact-clock" data-clock>Based in Gandhinagar, India (IST, UTC+05:30)</p>
       </div>
