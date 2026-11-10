@@ -58,6 +58,15 @@ All of these are optional extras in `assets/js/main.js`. Without JavaScript the 
   - lists two sitemaps: this site's and CodeNebula's (`/CodeNebula/sitemap.xml`, written by its VitePress build).
 - **`sitemap.xml`:** lists the one page.
 - **`rel="me"`** on the LinkedIn and GitHub links tells search engines those profiles are yours.
+- **Google verification: `google36e9d14bf79de261.html`** at the root proves to Google Search Console that the site is yours. Keep it: Search Console re-checks it, and deleting it loses access.
+- **IndexNow key: `0212f42f9b98fb67aab12f0c2fc6f87e.txt`** at the root proves to Bing, Yandex and the other IndexNow engines that notices about this site come from you. Keep it. After a big change, tell them straight away:
+
+  ```powershell
+  $body = @{ host = 'pruthvip.tech'; key = '0212f42f9b98fb67aab12f0c2fc6f87e'; keyLocation = 'https://pruthvip.tech/0212f42f9b98fb67aab12f0c2fc6f87e.txt'; urlList = @('https://pruthvip.tech/', 'https://pruthvip.tech/CodeNebula/') } | ConvertTo-Json
+  Invoke-RestMethod -Method Post -Uri https://api.indexnow.org/indexnow -ContentType 'application/json; charset=utf-8' -Body $body
+  ```
+
+  Google doesn't use IndexNow; for Google, use **Request indexing** in Search Console.
 
 ### When you change the page
 
