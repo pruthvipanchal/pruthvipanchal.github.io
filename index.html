@@ -74,7 +74,7 @@
         "mainEntity": { "@id": "https://pruthvip.tech/#person" },
         "primaryImageOfPage": "https://pruthvip.tech/assets/og-image.png",
         "dateCreated": "2026-10-25",
-        "dateModified": "2026-11-10",
+        "dateModified": "2026-11-12",
         "inLanguage": "en"
       },
       {
@@ -129,6 +129,7 @@
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7.5 7.5 6 7.5-6"/></symbol>
     <symbol id="i-terminal" viewBox="0 0 24 24"><path d="M4.5 7.5 9 12l-4.5 4.5M11.5 16.5h8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.25"/><path d="m16 16 4.25 4.25"/></symbol>
     <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4.5v4h-4"/></symbol>
     <symbol id="i-broadcast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.8"/><path d="M8.2 15.8a5.4 5.4 0 0 1 0-7.6M15.8 8.2a5.4 5.4 0 0 1 0 7.6M5.4 18.6a9.3 9.3 0 0 1 0-13.2M18.6 5.4a9.3 9.3 0 0 1 0 13.2"/></symbol>
     <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.75 5.5 13.25h6l-1 8 7.5-10.5h-6l1-8Z"/></symbol>
@@ -150,8 +151,10 @@
       <a class="mark" href="#top" aria-label="Pruthvi Panchal, back to top">
         <svg class="mark-svg" viewBox="0 0 32 32" aria-hidden="true">
           <ellipse class="mark-orbit" cx="16" cy="16" rx="13.5" ry="5.4" transform="rotate(-24 16 16)"/>
+          <!-- main.js moves the Moon round its orbit as the page scrolls: the first copy passes behind the Earth. -->
+          <circle class="mark-moon mark-moon-back" cx="28.5" cy="11" r="2.1"/>
           <circle class="mark-earth" cx="16" cy="16" r="4.6"/>
-          <circle class="mark-moon" cx="28.5" cy="11" r="2.1"/>
+          <circle class="mark-moon mark-moon-front" cx="28.5" cy="11" r="2.1"/>
         </svg>
         <span class="mark-name">Pruthvi Panchal</span>
       </a>
@@ -164,10 +167,14 @@
           <li><a href="#skills">Skills</a></li>
           <li><a href="#universe">Universe</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li class="nav-cmd js-only"><button type="button" data-palette-open>Search and commands</button></li>
         </ul>
       </nav>
 
       <div class="bar-actions">
+        <button class="icon-btn pal-open js-only" type="button" data-palette-open aria-label="Search and commands">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><kbd data-kbd>Ctrl K</kbd>
+        </button>
         <button class="icon-btn js-only" type="button" data-theme-toggle aria-label="Switch to light theme">
           <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
           <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
@@ -209,14 +216,30 @@
         </div>
 
         <div class="hero-earth" data-earth-stage>
-          <canvas class="earth-canvas js-only" data-earth role="img" aria-label="A glowing dotted Earth, turned to show India, with Gandhinagar marked. Drag to spin it."></canvas>
+          <canvas class="earth-canvas js-only" data-earth role="img" aria-label="A glowing dotted Earth, turned to show India, with Gandhinagar marked. Drag to spin it, or click anywhere to send light there."></canvas>
           <button class="earth-pin js-only" type="button" data-pin hidden aria-describedby="pin-tip">
             <span class="pin-dot" aria-hidden="true"></span>
             <span class="pin-label"><svg class="icon pin-sky" aria-hidden="true"><use href="#i-sun" data-pin-sky/></svg><span><span data-pin-time></span><span class="pin-place"> in Gandhinagar</span></span></span>
           </button>
           <p class="pin-tip" id="pin-tip" role="tooltip" data-pin-tip hidden>Gandhinagar, Gujarat. I live here and work in GIFT City, India's international finance hub.</p>
+          <!-- Where the visitor's light landed: main.js fills this in and keeps it beside the place. -->
+          <p class="light-chip js-only" data-light-chip role="status" hidden>
+            <span class="chip-top"><b data-light-place></b><span data-light-km></span></span>
+            <span class="chip-fact" data-light-fact></span>
+            <i class="chip-note">shown 25× slower than real</i>
+          </p>
           <div class="earth-fallback" aria-hidden="true"></div>
-          <p class="earth-hint"><span class="deva" lang="hi">पृथ्वी</span> <b>Pruthvi</b> means Earth.<span class="js-only"> Drag to spin it.</span></p>
+          <div class="earth-foot">
+            <p class="earth-hint"><span class="deva" lang="hi">पृथ्वी</span> <b>Pruthvi</b> means Earth.<span class="js-only"> Drag to spin it, or <span data-verb>click</span> anywhere to send light there.</span></p>
+            <p class="earth-go js-only">
+              <span>Send light to</span>
+              <button type="button" data-light-to="Mumbai" aria-label="Send light to Mumbai">Mumbai</button>
+              <button type="button" data-light-to="Singapore" aria-label="Send light to Singapore">Singapore</button>
+              <button type="button" data-light-to="London" aria-label="Send light to London">London</button>
+              <button type="button" data-light-to="New York" aria-label="Send light to New York">New York</button>
+              <button type="button" class="earth-day" data-day>Watch a day pass</button>
+            </p>
+          </div>
         </div>
       </div>
       <a class="scroll-cue" href="#about" aria-label="Scroll to About"><span></span></a>
@@ -226,7 +249,7 @@
     <section class="stats" aria-label="At a glance">
       <div class="wrap stats-grid">
         <div class="stat" data-reveal>
-          <p class="stat-num"><span data-count="4">4</span></p>
+          <p class="stat-num"><span data-count="4" data-since="2022-07">4</span></p>
           <p class="stat-label">Years in fintech</p>
         </div>
         <div class="stat" data-reveal>
@@ -242,6 +265,8 @@
           <p class="stat-label">Average order time<span class="stat-more">: a quarter of a millisecond</span>. <button class="link-btn js-only" type="button" data-race-open>Can you beat it?</button></p>
         </div>
       </div>
+      <!-- A running count at the platform's rate of 1,250 orders a second (main.js keeps it ticking). -->
+      <p class="wrap stats-live js-only" data-live hidden><i class="live-dot" aria-hidden="true"></i><span>At 1,250 orders a second, that's <b data-live-count>0</b> since you opened this page.</span></p>
     </section>
 
     <!-- About -->
@@ -283,7 +308,7 @@
             <div class="tl-card">
               <div class="company">
                 <h3>Greeksoft Technologies</h3>
-                <p class="tl-org"><span>GIFT City, Gandhinagar</span> · <span>4+ years</span> · <span>2 roles</span></p>
+                <p class="tl-org"><span>GIFT City, Gandhinagar</span> · <span data-tenure="2022-07">4+ years</span> · <span>2 roles</span></p>
               </div>
               <ol class="roles">
                 <li class="role is-now">
@@ -294,6 +319,7 @@
                     <li>Live prices to <b>10,000+ connections</b> per server; orders in <b>250 µs</b> on average</li>
                     <li>Kubernetes, CI/CD and monitoring: <b>99.9% uptime</b> and <b>60% faster</b> deploys</li>
                   </ul>
+                  <ul class="role-stack" aria-label="Main tools"><li>Go</li><li>NATS JetStream</li><li>Kubernetes</li><li>Redis</li><li>PostgreSQL</li><li>WebSocket</li></ul>
                 </li>
                 <li class="role">
                   <p class="role-when"><time datetime="2022-07">Jul 2022</time> – <time datetime="2024-07">Jul 2024</time></p>
@@ -303,6 +329,7 @@
                     <li>Cut order-routing latency by <b>15%</b> by moving hot paths into memory</li>
                     <li>Fixed <b>200+ critical bugs</b> in algorithmic trading strategies</li>
                   </ul>
+                  <ul class="role-stack" aria-label="Main tools"><li>C++</li><li>FIX</li><li>MFC</li><li>TCP/UDP</li></ul>
                 </li>
               </ol>
             </div>
@@ -320,6 +347,7 @@
                   <ul>
                     <li>Built responsive websites for clients, from design to launch</li>
                   </ul>
+                  <ul class="role-stack" aria-label="Main tools"><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Bootstrap</li></ul>
                 </li>
               </ol>
             </div>
@@ -346,48 +374,152 @@
         </div>
 
         <ul class="cards">
+          <!-- Each card opens with a small moving picture of what the system does (.card-art, drawn in
+               CSS), and folds out how it's built. data-spot names its place in the diagram below. -->
           <li class="card" data-reveal>
+            <div class="card-art art-fan" aria-hidden="true"><i class="art-src"></i></div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-broadcast"/></svg></span>
             <p class="card-num">10,000+</p>
             <p class="card-unit">live connections per server</p>
             <h3>Real-time price broadcast</h3>
             <p>Streams live market prices to thousands of traders at once, in under a millisecond.</p>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>A WebSocket server holding 10,000+ connections per node</li>
+                <li>Worker pools sized to the CPU's cores</li>
+                <li>Memory pooling keeps it steady under heavy load</li>
+                <li>Watches itself for goroutine leaks</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="bc">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
           <li class="card" data-reveal>
+            <div class="card-art art-copy" aria-hidden="true">
+              <svg viewBox="0 0 240 64" preserveAspectRatio="xMidYMid slice">
+                <path class="a-rail" d="M0 23H240M0 43H240"/>
+                <rect class="a-pk a-pk-1" x="-9" y="19.5" width="18" height="7" rx="3.5"/>
+                <rect class="a-pk a-pk-2" x="-9" y="19.5" width="18" height="7" rx="3.5"/>
+                <rect class="a-pk a-pk-3" x="-9" y="19.5" width="18" height="7" rx="3.5"/>
+                <rect class="a-pk a-twin a-pk-1" x="-9" y="39.5" width="18" height="7" rx="3.5"/>
+                <rect class="a-pk a-twin a-pk-2" x="-9" y="39.5" width="18" height="7" rx="3.5"/>
+                <rect class="a-pk a-twin a-pk-3" x="-9" y="39.5" width="18" height="7" rx="3.5"/>
+              </svg>
+            </div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg></span>
             <p class="card-num">250 µs</p>
             <p class="card-unit">average per order</p>
             <h3>Lock-free order replication</h3>
             <p>Copies orders between systems at 1,250+ a second, with 95%+ cache hits.</p>
             <button class="link-btn js-only" type="button" data-race-open>Can you beat 250 µs?<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>Lock-free, so no order waits on another</li>
+                <li>95%+ of lookups answered from the Redis cache</li>
+                <li>Reads the older C++ system's binary data directly, checking magic numbers and using fixed-point maths</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="or">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
           <li class="card" data-reveal>
+            <div class="card-art art-join" aria-hidden="true">
+              <svg viewBox="0 0 240 64">
+                <path class="a-rail" d="M30 14 128 32M30 32H128M30 50 128 32M128 32H200"/>
+                <circle class="a-end" cx="30" cy="14" r="3.5"/>
+                <circle class="a-end" cx="30" cy="32" r="3.5"/>
+                <circle class="a-end" cx="30" cy="50" r="3.5"/>
+                <circle class="a-dot a-in-1" r="3"/>
+                <circle class="a-dot a-in-2" r="3"/>
+                <circle class="a-dot a-in-3" r="3"/>
+                <circle class="a-hub" cx="128" cy="32" r="5"/>
+                <circle class="a-done" cx="208" cy="32" r="8.5"/>
+                <path class="a-tick" d="m204 32.2 2.8 2.8 5.2-5.6"/>
+              </svg>
+            </div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg></span>
             <p class="card-num">3</p>
             <p class="card-unit">payment gateways, one system</p>
             <h3>Payments layer</h3>
             <p>ATOM, Razorpay and HDFC UPI behind one interface, with automatic reconciliation.</p>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>One gateway interface; a factory picks ATOM, Razorpay or HDFC UPI</li>
+                <li>Credentials rotate through HashiCorp Vault</li>
+                <li>A background service reconciles payments continuously</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="pay">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
           <li class="card" data-reveal>
+            <div class="card-art art-bus" aria-hidden="true">
+              <svg viewBox="0 0 240 64" preserveAspectRatio="xMidYMid slice">
+                <path class="a-rail" d="M38 21V29M84 43V35M126 21V29M168 43V35M208 21V29"/>
+                <rect class="a-lane" x="-6" y="29" width="252" height="6" rx="3"/>
+                <rect class="a-svc a-svc-1" x="30" y="12" width="16" height="9" rx="2.5"/>
+                <rect class="a-svc a-svc-2" x="76" y="43" width="16" height="9" rx="2.5"/>
+                <rect class="a-svc a-svc-3" x="118" y="12" width="16" height="9" rx="2.5"/>
+                <rect class="a-svc a-svc-4" x="160" y="43" width="16" height="9" rx="2.5"/>
+                <rect class="a-svc a-svc-5" x="200" y="12" width="16" height="9" rx="2.5"/>
+                <circle class="a-dot a-run a-run-1" cy="32" r="2.6"/>
+                <circle class="a-dot a-run a-run-2" cy="32" r="2.6"/>
+                <circle class="a-dot a-run a-run-3" cy="32" r="2.6"/>
+              </svg>
+            </div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></span>
             <p class="card-num">10+</p>
             <p class="card-unit">services on one message bus</p>
             <h3>Event backbone</h3>
             <p>NATS JetStream links the services, so no message is lost even when one goes down.</p>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>Durable consumers pick up where they left off</li>
+                <li>Stream replay after an outage</li>
+                <li>Consul reloads config live, with no restarts</li>
+                <li>Each broker's PostgreSQL and Redis data is kept apart</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="bus">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
           <li class="card" data-reveal>
+            <div class="card-art art-up" aria-hidden="true"></div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg></span>
             <p class="card-num">99.9%</p>
             <p class="card-unit">uptime on Kubernetes</p>
             <h3>Platform &amp; monitoring</h3>
             <p>CI/CD made deploys 60% faster; Prometheus, OpenTelemetry and Grafana watch everything.</p>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>All 17 services run on Kubernetes</li>
+                <li>CI/CD pipelines cut deploy time by 60%</li>
+                <li>Prometheus metrics, OpenTelemetry tracing and Grafana dashboards</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="all">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
           <li class="card" data-reveal>
+            <div class="card-art art-fast" aria-hidden="true">
+              <p><span>before</span><i class="art-bar art-bar-before"></i></p>
+              <p><span>after</span><i class="art-bar art-bar-after"></i></p>
+            </div>
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg></span>
             <p class="card-num">40%</p>
             <p class="card-unit">faster responses</p>
             <h3>Speed tuning</h3>
             <p>Redis and RediSearch tuning, plus Linux tricks like io_uring and CPU pinning.</p>
+            <details class="how-built">
+              <summary>How it's built</summary>
+              <ul>
+                <li>io_uring for asynchronous I/O</li>
+                <li>Hot goroutines pinned to CPU cores with <code>runtime.LockOSThread</code></li>
+                <li>TCP tuned on the price paths: <code>TCP_NODELAY</code> and <code>SO_SNDBUF</code></li>
+                <li>perf and strace to find bottlenecks in the kernel</li>
+              </ul>
+              <button class="link-btn js-only" type="button" data-spot="sr">See it in the diagram<svg class="icon" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+            </details>
           </li>
         </ul>
 
@@ -395,6 +527,10 @@
           <div class="how-copy" data-reveal>
             <h3>See how it works</h3>
             <p>Six Go services from the trading platform I build, all talking over one NATS JetStream message bus.</p>
+            <p class="how-actions js-only">
+              <button class="btn btn-small btn-primary" type="button" data-topo-send><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>Send an order</button>
+              <span>Then switch <b>notify</b> off and send another.</span>
+            </p>
           </div>
 
           <figure class="topo" data-reveal aria-label="Diagram of the trading platform: prices and order events moving between six Go microservices over a NATS JetStream bus">
@@ -455,32 +591,77 @@
         <div class="section-head" data-reveal>
           <p class="kicker">Skills</p>
           <h2 id="skills-title">My toolbox</h2>
+          <p class="lead js-only"><span data-skill-verb>Hover over</span> a skill to see where I used it.</p>
         </div>
 
         <div class="skills">
           <div class="skill-group" data-reveal>
             <h3>Languages</h3>
-            <ul class="chips"><li class="is-key">Go (Golang)</li><li class="is-key">C++</li><li>JavaScript</li><li>PHP</li><li>SQL</li></ul>
+            <ul class="chips">
+              <li class="is-key" data-used="17 microservices on the trading platform, plus the servers of Sirius, Quasar and Gravitone.">Go (Golang)</li>
+              <li class="is-key" data-used="Two years of high-frequency trading systems. CodeNebula covers 968 of its concepts.">C++</li>
+              <li data-used="Client websites at Angel IT Solution. This page, too.">JavaScript</li>
+              <li data-used="Client websites at Angel IT Solution.">PHP</li>
+              <li data-used="PostgreSQL on the trading platform, MySQL at Angel IT Solution.">SQL</li>
+            </ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>Backend &amp; messaging</h3>
-            <ul class="chips"><li class="is-key">NATS JetStream</li><li>gRPC</li><li>REST</li><li>WebSocket</li><li>FIX</li><li>TCP/UDP</li><li>Gin</li><li>Fasthttp</li><li>MFC &amp; Win32</li></ul>
+            <ul class="chips">
+              <li class="is-key" data-used="The event backbone linking 10+ services, with durable consumers and replay.">NATS JetStream</li>
+              <li>gRPC</li>
+              <li>REST</li>
+              <li data-used="Live prices to 10,000+ connections per server.">WebSocket</li>
+              <li data-used="Order routing in the C++ trading systems.">FIX</li>
+              <li data-used="Market data streaming between trading nodes.">TCP/UDP</li>
+              <li>Gin</li>
+              <li>Fasthttp</li>
+              <li data-used="The C++ trading systems were built with VC++ and MFC.">MFC &amp; Win32</li>
+            </ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>Data</h3>
-            <ul class="chips"><li>PostgreSQL</li><li>Redis</li><li>RediSearch</li><li>MySQL</li></ul>
+            <ul class="chips">
+              <li data-used="Each broker's data kept apart on the trading platform. Moonsplit runs on it too.">PostgreSQL</li>
+              <li data-used="95%+ cache hits in order replication.">Redis</li>
+              <li data-used="Search tuned for 40% faster responses.">RediSearch</li>
+              <li data-used="Client websites at Angel IT Solution.">MySQL</li>
+            </ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>Cloud &amp; DevOps</h3>
-            <ul class="chips"><li class="is-key">Kubernetes</li><li>Docker</li><li>CI/CD</li><li>GitLab</li><li>HashiCorp Vault</li><li>Consul</li><li>KrakenD</li></ul>
+            <ul class="chips">
+              <li class="is-key" data-used="All 17 services, at 99.9% uptime.">Kubernetes</li>
+              <li>Docker</li>
+              <li data-used="Pipelines that cut deploy time by 60%.">CI/CD</li>
+              <li>GitLab</li>
+              <li data-used="Rotates the payment gateways' credentials.">HashiCorp Vault</li>
+              <li data-used="Reloads config live, with no restarts.">Consul</li>
+              <li>KrakenD</li>
+            </ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>Speed &amp; monitoring</h3>
-            <ul class="chips"><li>io_uring</li><li>CPU pinning</li><li>TCP tuning</li><li>perf</li><li>pprof</li><li>Prometheus</li><li>OpenTelemetry</li><li>Grafana</li></ul>
+            <ul class="chips">
+              <li data-used="Asynchronous I/O in the Go services.">io_uring</li>
+              <li data-used="Hot goroutines pinned to cores with runtime.LockOSThread.">CPU pinning</li>
+              <li data-used="TCP_NODELAY and SO_SNDBUF on the price paths.">TCP tuning</li>
+              <li data-used="Finding bottlenecks in the kernel, with strace.">perf</li>
+              <li>pprof</li>
+              <li data-used="Metrics for all 17 services.">Prometheus</li>
+              <li data-used="Distributed tracing across the services.">OpenTelemetry</li>
+              <li data-used="Dashboards over the whole platform.">Grafana</li>
+            </ul>
           </div>
           <div class="skill-group" data-reveal>
             <h3>AI</h3>
-            <ul class="chips"><li>Claude API</li><li>OpenAI API</li><li>Claude Code</li><li>Cursor</li><li>AI agents</li></ul>
+            <ul class="chips">
+              <li data-used="Building LLM-powered tools and workflows.">Claude API</li>
+              <li data-used="Building LLM-powered tools and workflows.">OpenAI API</li>
+              <li data-used="How I build, every day.">Claude Code</li>
+              <li data-used="How I build, every day.">Cursor</li>
+              <li data-used="Hands-on with several agent frameworks.">AI agents</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -508,12 +689,16 @@
               <button type="button" role="tab" id="tab-codenebula" aria-controls="codenebula" aria-selected="false" tabindex="-1" data-tab="codenebula"><i class="tab-dot dot-nebula"></i>CodeNebula</button>
               <button type="button" role="tab" id="tab-gravitone" aria-controls="gravitone" aria-selected="false" tabindex="-1" data-tab="gravitone"><i class="tab-dot dot-hole"></i>Gravitone</button>
               <button type="button" role="tab" id="tab-quasar" aria-controls="quasar" aria-selected="false" tabindex="-1" data-tab="quasar"><i class="tab-dot dot-quasar"></i>Quasar</button>
+              <button type="button" role="tab" id="tab-spacetime" aria-controls="spacetime" aria-selected="false" tabindex="-1" data-tab="spacetime"><i class="tab-dot dot-well"></i>Spacetime</button>
             </div>
           </div>
 
+          <!-- With scripts, each card opens on a window of sky (.project-art): main.js draws the
+               project's namesake there, and the name sits beside it. -->
           <div class="panels">
               <article class="project" id="moonsplit" role="tabpanel" aria-labelledby="tab-moonsplit" data-body="moon">
-                <div class="project-top"><h3>Moonsplit</h3><span class="status">Private beta</span></div>
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
+                <div class="project-top"><h3>Moonsplit</h3><span class="status">Private beta</span><p class="art-cap js-only" data-moon-cap></p></div>
                 <p class="named"><span>Named after the Moon.</span> It goes through phases every month. So do your flatmates' excuses. Rent doesn't.</p>
                 <p>Splits flat rent and bills to the paisa. One flatmate collects, everyone sees exactly what they owe, and every month has to add up to ₹0.</p>
                 <p class="fun"><span>Excuses accepted</span><b>0</b></p>
@@ -522,6 +707,7 @@
               </article>
 
               <article class="project" id="sirius" role="tabpanel" aria-labelledby="tab-sirius" data-body="star">
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
                 <div class="project-top"><h3>Sirius</h3><span class="status is-live">Open source</span></div>
                 <p class="named"><span>Named after the brightest star in the night sky.</span> It isn't the biggest, just well placed. That's what preparing does.</p>
                 <p>My interview-prep notebook: notes with code and maths, flashcards that come back just before you'd forget, and instant search. Everything stays on your own computer.</p>
@@ -530,6 +716,7 @@
               </article>
 
               <article class="project" id="codenebula" role="tabpanel" aria-labelledby="tab-codenebula" data-body="nebula">
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
                 <div class="project-top"><h3>CodeNebula</h3><span class="status is-live">Live</span></div>
                 <p class="named"><span>Named after a nebula, where stars are born.</span> This is where programmers start.</p>
                 <p>Learn C++, Go and Python one concept at a time: 968 C++ concepts across eight standards, each with a real example you can run. Explore the C++ standards as a 3D galaxy, and run code right in your browser.</p>
@@ -542,6 +729,7 @@
               </article>
 
               <article class="project" id="gravitone" role="tabpanel" aria-labelledby="tab-gravitone" data-body="hole">
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
                 <div class="project-top"><h3>Gravitone</h3><span class="status">Private beta</span></div>
                 <p class="named"><span>Named after gravity + tone.</span> Gravity holds planets in one orbit; Gravitone holds every phone in the room on one beat.</p>
                 <p>Turns every phone and laptop in a room into one big speaker, in sync to the millisecond. Nothing to install.</p>
@@ -549,11 +737,21 @@
               </article>
 
               <article class="project" id="quasar" role="tabpanel" aria-labelledby="tab-quasar" data-body="quasar">
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
                 <div class="project-top"><h3>Quasar</h3><span class="status">Private MVP</span></div>
                 <p class="named"><span>Named after quasars,</span> the brightest beacons in the universe, seen across billions of light-years.</p>
                 <p>Scan a QR code and the links and notes you send from your phone appear on your laptop instantly, end-to-end encrypted.</p>
                 <ul class="chips"><li>Go</li><li>WebRTC</li><li>WebCrypto</li><li>React</li></ul>
                 <p class="project-note">Source not public yet. File sharing is next.</p>
+              </article>
+
+              <article class="project" id="spacetime" role="tabpanel" aria-labelledby="tab-spacetime" data-body="well">
+                <canvas class="project-art js-only" data-art aria-hidden="true"></canvas>
+                <div class="project-top"><h3>Spacetime</h3><span class="status">In development</span></div>
+                <p class="named"><span>Named after spacetime, the fabric of space and time.</span> It frees space on your phone and files every memory by time.</p>
+                <p>An Android app that shows what fills your phone, backs every photo up to your own drive, checks each copy, and only then makes space. No cloud.</p>
+                <ul class="chips"><li>Kotlin</li><li>Jetpack Compose</li><li>Go</li><li>SHA-256</li></ul>
+                <p class="project-note">Source not public yet.</p>
               </article>
           </div>
         </div>
@@ -578,6 +776,8 @@
         </div>
         <p class="contact-clock" data-clock>Based in Gandhinagar, India (IST, UTC+05:30)</p>
       </div>
+      <!-- A Sun comes up behind the Earth's edge as this section scrolls into view. -->
+      <div class="sunrise" aria-hidden="true"></div>
       <div class="horizon" aria-hidden="true"></div>
     </section>
   </main>
@@ -617,11 +817,36 @@
         <span class="race-pad-small" data-race-small>Click, tap or press Space</span>
       </button>
       <p class="race-verdict" data-race-verdict role="status"></p>
+      <!-- After each run: the last five as bars, with the average, the best and the spread. -->
+      <div class="race-runs" data-race-runs hidden>
+        <div class="race-bars" data-race-bars></div>
+        <p class="race-summary" data-race-summary></p>
+        <ol class="visually-hidden" data-race-list></ol>
+      </div>
       <dl class="race-stats">
         <div><dt>You</dt><dd data-race-you>—</dd></div>
         <div><dt>My order system</dt><dd>0.25 ms</dd></div>
         <div><dt>Your best</dt><dd data-race-best>—</dd></div>
       </dl>
+    </div>
+  </dialog>
+
+  <!-- "This page, measured": numbers the page reads about itself, in the visitor's own browser.
+       main.js fills it in; the footer's "loaded in" and the palette open it. -->
+  <dialog class="perf" data-perf aria-labelledby="perf-title">
+    <div class="perf-box">
+      <div class="race-head">
+        <h2 id="perf-title">This page, measured</h2>
+        <button class="icon-btn" type="button" data-perf-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="race-lead">I make software fast for a living, so here are this page's own numbers, read in your browser just now.</p>
+      <dl class="perf-tiles" data-perf-tiles></dl>
+      <div class="perf-frames">
+        <p class="perf-frames-head"><span>Frame rate, live</span><b data-perf-fps>—</b></p>
+        <svg class="perf-spark" data-perf-spark viewBox="0 0 400 56" role="img" aria-label="Time taken by each of the last frames"><path class="spark-area"/><path class="spark-line"/><circle class="spark-dot" r="4"/></svg>
+        <p class="perf-note" data-perf-note></p>
+      </div>
+      <p class="perf-foot">No frameworks, no dependencies, no tracking. None of this is sent anywhere.</p>
     </div>
   </dialog>
 </body>
