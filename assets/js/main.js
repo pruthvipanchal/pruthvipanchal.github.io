@@ -50,10 +50,10 @@
     const frame = (now) => {
       raf = 0;
       if (!running) return;
+      raf = requestAnimationFrame(frame); // booked first, so an error while drawing can't stop the loop
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       draw(now, dt);
-      raf = requestAnimationFrame(frame);
     };
     const start = () => {
       if (running || reduceMotion.matches || !onScreen || document.hidden) return;
@@ -916,7 +916,9 @@
       signals = signals.filter((s) => now - s.born < s.dur + LINGER);
       ctx.lineCap = 'round';
       signals.forEach((s) => {
-        const age = still ? 1 : (now - s.born) / s.dur;
+        // A click can be handled a few ms after the frame's timestamp was taken, so the light can
+        // look "younger than zero" for one frame. Start it at zero instead.
+        const age = still ? 1 : Math.max(0, (now - s.born) / s.dur);
         const after = still ? 1000 : now - s.born - s.dur; // milliseconds since it landed
         const pts = s.pts.map((p) => project(p, view, cx, cy, R));
         const n = pts.length - 1;
@@ -999,10 +1001,13 @@
       chip.style.transform = `translate(${clamp(x - chipW / 2, 6, w - chipW - 6).toFixed(1)}px, ${(below ? y + 18 : y - chipH - 18).toFixed(1)}px)`;
     }
 
+    /** How long the light takes on screen to reach a place, in milliseconds. */
+    const travel = (to) => clamp(lightMs(kmBetween(HOME, to)) * SLOW, 160, 1900);
+
     function sendLight(to, { hello = '' } = {}) {
       const km = kmBetween(HOME, to);
       const ms = lightMs(km);
-      const sig = { to, pts: arcPoints(HOME, to, 48, 0.2), born: performance.now(), dur: clamp(ms * SLOW, 160, 1900), km, ms, hello, shown: false };
+      const sig = { to, pts: arcPoints(HOME, to, 48, 0.2), born: performance.now(), dur: travel(to), km, ms, hello, shown: false };
       signals = [...signals.slice(-2), sig];
       if (chip) chip.hidden = true;
       landed = sig;
@@ -1016,26 +1021,30 @@
       }, 6500);
     }
 
-    /** Turns the globe so a place faces the viewer, then holds it there for a while. */
-    function flyTo(v, hold = 5600) {
+    /** Turns the globe so a place faces the viewer, then holds it there for `hold` milliseconds. */
+    function flyTo(v, hold) {
       const [lat, lon] = latLon(v);
       fly = { lon: lon * RAD, lat: clamp(lat * RAD, -0.95, 0.95), until: performance.now() + hold };
       if (reduceMotion.matches) { state.lon = fly.lon; state.lat = fly.lat; }
     }
 
-    /** Sends light to a place, first turning the globe if the path wouldn't be in view. */
+    /** Sends light to a place, first turning the globe if the path wouldn't be in view. The globe
+        holds still only while the light travels, then goes back to its slow spin; the chip
+        follows the place as it turns. */
     function aim(to, opts) {
       const view = viewOf(state.lat, state.lon);
       const facing = (v) => project(v, view, 0, 0, 1)[2];
       const mid = [HOME[0] + to[0], HOME[1] + to[1], HOME[2] + to[2]];
       const len = Math.hypot(mid[0], mid[1], mid[2]);
+      const LAND = 500; // a moment to see it land
       if (facing(to) > 0.4 && facing(HOME) > 0.2) {
-        fly = { lon: state.lon, lat: state.lat, until: performance.now() + 5600 }; // hold still while it travels
+        fly = { lon: state.lon, lat: state.lat, until: performance.now() + travel(to) + LAND };
         sendLight(to, opts);
         return;
       }
-      flyTo(len > 0.2 ? mid.map((c) => c / len) : to);
-      setTimeout(() => sendLight(to, opts), reduceMotion.matches ? 0 : 560);
+      const TURN = reduceMotion.matches ? 0 : 560;
+      flyTo(len > 0.2 ? mid.map((c) => c / len) : to, TURN + travel(to) + LAND);
+      setTimeout(() => sendLight(to, opts), TURN);
     }
 
     /* "Watch a day pass": 24 hours in ten seconds, with India facing the viewer. With reduced
@@ -1119,6 +1128,7 @@
     function frame(now) {
       raf = 0;
       if (!running) return;
+      raf = requestAnimationFrame(frame); // booked first, so an error while drawing can't stop the globe
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       if (lapse) {
@@ -1151,7 +1161,6 @@
         }
       }
       draw(now);
-      raf = requestAnimationFrame(frame);
     }
 
     function start() {
@@ -1697,6 +1706,7 @@
     function frame(now) {
       raf = 0;
       if (!running) return;
+      raf = requestAnimationFrame(frame); // booked first, so an error while drawing can't stop the orbits
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       if (!spin?.moved) {
@@ -1713,7 +1723,6 @@
       fabric += ((KINDS[current] === 'well' ? 1 : 0) - fabric) * Math.min(1, dt * 3);
       earthLon -= 0.12 * dt;
       draw(now);
-      raf = requestAnimationFrame(frame);
     }
 
     function start() {
@@ -2598,6 +2607,7 @@
 
     function frame(now) {
       if (!running) return;
+      raf = requestAnimationFrame(frame); // booked first, so an error in one step can't stop the diagram
       clock += Math.min(now - last, 64);
       last = now;
 
@@ -2635,8 +2645,6 @@
         nodes[name].classList.remove('is-hit');
         delete hitUntil[name];
       });
-
-      raf = requestAnimationFrame(frame);
     }
 
     function start() {
