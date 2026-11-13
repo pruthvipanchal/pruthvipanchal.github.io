@@ -61,7 +61,7 @@ All of these are optional extras in `assets/js/main.js`. Without JavaScript the 
 
 - **In `index.html`'s `<head>`:** the title, a description of about 155 characters, the canonical URL, Open Graph and X preview tags, and structured data (JSON-LD).
   - The structured data describes the site (`#website`), the profile page (`#profilepage`), you (`#person`) and the public projects.
-  - The site's `name` is "Pruthvi Panchal", which is what Google shows as the site name in results.
+  - The site's `name` is "Pruthvi Panchal", which is what Google shows as the site name in results. `og:site_name` says the same.
   - CodeNebula's reference names `https://pruthvip.tech/#person` as its author, so keep that `@id` as it is.
 - **`robots.txt`:**
   - keeps the résumé (it carries the phone number), `tools/` and this README out of search;
@@ -100,8 +100,10 @@ All of these are optional extras in `assets/js/main.js`. Without JavaScript the 
      - `CodeNebula`: `https://pruthvip.tech/CodeNebula/`
      - `Sirius`: `https://pruthvip.tech/#sirius`
    - **GitHub profile → Customize your pins:** CodeNebula, Sirius and `pruthvipanchal.github.io`.
-   - **LinkedIn:** **Contact info → Website** (type: Portfolio) `https://pruthvip.tech`, and add the site under **Featured**.
+   - **LinkedIn:** **Contact info → Website** (type: Portfolio) `https://pruthvip.tech`, and add the site under **Featured**. In **Settings → Visibility → Edit your public profile**, keep **Your profile's public visibility** on and every section shown: a hidden public profile never appears in Google.
+   - **More profiles under the same name,** each with the same headline and a link here: for example Stack Overflow, X, Peerlist, or dev.to or Medium with an article. Profile pages on big sites often rank for a name themselves, so they fill the first page of results with you and point back here.
 5. **Check back in a week or two.** Search Console's **Pages** report shows what's indexed. Test the structured data at <https://search.google.com/test/rich-results> and <https://validator.schema.org/>, and speed at <https://pagespeed.web.dev/>.
+6. **Ranking first for your name.** Google decides the order, and your own searches are personalised, so measure it in Search Console: **Performance → Search results**, filtered to the query `pruthvi panchal`, shows the site's average position. A new domain usually takes weeks to climb; links from profiles that already rank for the name (step 4) are what move it.
 
 If the résumé ever shows up in Google anyway (for example, because another site links to it), remove it with Search Console's **Removals** tool.
 
